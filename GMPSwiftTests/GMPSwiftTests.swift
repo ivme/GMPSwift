@@ -53,6 +53,20 @@ class GMPSwiftTests: XCTestCase {
         XCTAssert(value.description == check.description, "Pass")
     }
     
+    func testHashable() {
+        // This is an example of a functional test case.
+        var check = IntMP(value: IntMax.min, bitcnt: 130)
+        var value = IntMP(value: IntMax.min, bitcnt: 200)
+        
+        XCTAssert(check.description == value.description, "Pass")
+        XCTAssert(check.hashValue == value.hashValue, "Pass")
+        
+        value = IntMP(value: IntMax.max, bitcnt: 200)
+        
+        XCTAssert(check.description != value.description, "Pass")
+        XCTAssert(check.hashValue != value.hashValue, "Pass")
+    }
+    
     func testDescriptionVar() {
         // This is an example of a functional test case.
         var value = IntMP(36)

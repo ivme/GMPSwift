@@ -34,9 +34,9 @@ public final class IntMP: SignedIntegerType{
         __gmpz_init_set_si(gmpz_p, int)
     }
 
-    public init(value: Int, bitcnt: Int){
+    public init(value: IntMax, bitcnt: Int){
         __gmpz_init2(gmpz_p, mp_bitcnt_t(bitcnt))
-        __gmpz_set_si(gmpz_p, value)
+        __gmpz_set_si(gmpz_p, Int(value))
     }
 
     public init(rawValue: IntMP){

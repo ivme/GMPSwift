@@ -1,0 +1,8 @@
+framework module GMPSwift {
+    umbrella header "GMPSwift-Swift.h"
+    
+    header "GMPSwift.h"
+    
+    export *
+    module * { export * }
+}
