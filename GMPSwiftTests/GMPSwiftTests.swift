@@ -8,6 +8,7 @@
 
 import Cocoa
 import XCTest
+import GMPSwift
 
 class GMPSwiftTests: XCTestCase {
     
@@ -21,9 +22,49 @@ class GMPSwiftTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testInitBase() {
         // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        var value = IntMP()
+        
+        XCTAssert(value == 0, "Pass")
+    }
+    
+    func testInitInitialValue() {
+        // This is an example of a functional test case.
+        let check = 36
+        var value = IntMP(check)
+        
+        XCTAssert(value == check, "Pass")
+    }
+    
+    func testInitIntMaxMax() {
+        // This is an example of a functional test case.
+        var check = IntMax.max
+        var value = IntMP(check)
+        
+        XCTAssert(value.description == check.description, "Pass")
+    }
+    
+    func testInitIntMaxMin() {
+        // This is an example of a functional test case.
+        var check = IntMax.min
+        var value = IntMP(check)
+        
+        XCTAssert(value.description == check.description, "Pass")
+    }
+    
+    func testDescriptionVar() {
+        // This is an example of a functional test case.
+        var value = IntMP(36)
+        
+        XCTAssert(value.description == 36.description, "Pass")
+    }
+    
+    func testDescriptionFunc() {
+        // This is an example of a functional test case.
+        var value = IntMP(36)
+        
+        XCTAssert(value.description(16) == "24", "Pass")
     }
     
     func testPerformanceExample() {

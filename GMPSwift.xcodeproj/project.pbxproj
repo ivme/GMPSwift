@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F4F55B1E1B8E35780072F09B /* GMPSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F55B1D1B8E35780072F09B /* GMPSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4F55B241B8E35780072F09B /* GMPSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; };
 		F4F55B2B1B8E35780072F09B /* GMPSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B2A1B8E35780072F09B /* GMPSwiftTests.swift */; };
+		F4F55B381B8E36050072F09B /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
+		F4F55B391B8E36050072F09B /* gmp.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F55B371B8E36050072F09B /* gmp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4F55B3D1B8E36220072F09B /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; };
+		F4F55B3E1B8E36220072F09B /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B3C1B8E36220072F09B /* libgmp.a */; };
+		F4F55B401B8E36A80072F09B /* IntMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B3F1B8E36A80072F09B /* IntMP.swift */; };
+		F4F55B441B8E39720072F09B /* GMPSwift-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F55B431B8E39720072F09B /* GMPSwift-Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,10 +30,16 @@
 /* Begin PBXFileReference section */
 		F4F55B181B8E35780072F09B /* GMPSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMPSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F55B1C1B8E35780072F09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4F55B1D1B8E35780072F09B /* GMPSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
 		F4F55B231B8E35780072F09B /* GMPSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMPSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F55B291B8E35780072F09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4F55B2A1B8E35780072F09B /* GMPSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPSwiftTests.swift; sourceTree = "<group>"; };
+		F4F55B341B8E35CD0072F09B /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "gmp-man-6.0.0a.pdf"; path = "GMP/Common/gmp-man-6.0.0a.pdf"; sourceTree = "<group>"; };
+		F4F55B371B8E36050072F09B /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gmp.h; path = GMP/Common/gmp.h; sourceTree = "<group>"; };
+		F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmp.10.dylib; path = GMP/OSX/libgmp.10.dylib; sourceTree = "<group>"; };
+		F4F55B3C1B8E36220072F09B /* libgmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgmp.a; path = GMP/OSX/libgmp.a; sourceTree = "<group>"; };
+		F4F55B3F1B8E36A80072F09B /* IntMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntMP.swift; sourceTree = "<group>"; };
+		F4F55B431B8E39720072F09B /* GMPSwift-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMPSwift-Swift.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F55B3E1B8E36220072F09B /* libgmp.a in Frameworks */,
+				F4F55B3D1B8E36220072F09B /* libgmp.10.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +66,7 @@
 		F4F55B0E1B8E35780072F09B = {
 			isa = PBXGroup;
 			children = (
+				F4F55B3A1B8E36090072F09B /* GMP */,
 				F4F55B1A1B8E35780072F09B /* GMPSwift */,
 				F4F55B271B8E35780072F09B /* GMPSwiftTests */,
 				F4F55B191B8E35780072F09B /* Products */,
@@ -71,7 +85,8 @@
 		F4F55B1A1B8E35780072F09B /* GMPSwift */ = {
 			isa = PBXGroup;
 			children = (
-				F4F55B1D1B8E35780072F09B /* GMPSwift.h */,
+				F4F55B431B8E39720072F09B /* GMPSwift-Swift.h */,
+				F4F55B3F1B8E36A80072F09B /* IntMP.swift */,
 				F4F55B1B1B8E35780072F09B /* Supporting Files */,
 			);
 			path = GMPSwift;
@@ -80,6 +95,7 @@
 		F4F55B1B1B8E35780072F09B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F4F55B341B8E35CD0072F09B /* module.modulemap */,
 				F4F55B1C1B8E35780072F09B /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -102,6 +118,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F4F55B3A1B8E36090072F09B /* GMP */ = {
+			isa = PBXGroup;
+			children = (
+				F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */,
+				F4F55B3C1B8E36220072F09B /* libgmp.a */,
+				F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */,
+				F4F55B371B8E36050072F09B /* gmp.h */,
+			);
+			name = GMP;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -109,7 +136,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F55B1E1B8E35780072F09B /* GMPSwift.h in Headers */,
+				F4F55B391B8E36050072F09B /* gmp.h in Headers */,
+				F4F55B441B8E39720072F09B /* GMPSwift-Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F55B381B8E36050072F09B /* gmp-man-6.0.0a.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4F55B401B8E36A80072F09B /* IntMP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,8 +357,14 @@
 				INFOPLIST_FILE = GMPSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GMP/OSX",
+				);
+				MODULEMAP_FILE = GMPSwift/module.modulemap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = GMPSwift.h;
 			};
 			name = Debug;
 		};
@@ -344,8 +380,14 @@
 				INFOPLIST_FILE = GMPSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GMP/OSX",
+				);
+				MODULEMAP_FILE = GMPSwift/module.modulemap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = GMPSwift.h;
 			};
 			name = Release;
 		};
