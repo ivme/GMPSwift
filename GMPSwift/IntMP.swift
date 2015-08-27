@@ -34,6 +34,11 @@ public final class IntMP: SignedIntegerType{
         __gmpz_init_set_si(gmpz_p, int)
     }
 
+    public init(value: Int, bitcnt: Int){
+        __gmpz_init2(gmpz_p, mp_bitcnt_t(bitcnt))
+        __gmpz_set_si(gmpz_p, value)
+    }
+    
     public init(value: IntMax, bitcnt: Int){
         __gmpz_init2(gmpz_p, mp_bitcnt_t(bitcnt))
         __gmpz_set_si(gmpz_p, Int(value))
@@ -52,12 +57,14 @@ public final class IntMP: SignedIntegerType{
         var size = __gmpz_size(gmpz_p)
         var limbs: UnsafePointer<UInt> = __gmpz_limbs_read(gmpz_p)
         var result: UInt = 0
+        var tmp: UInt = 0
 
         for val in 0 ..< size {
-            result ^= limbs[val]
+            tmp = limbs[val]
+            result ^= tmp
         }
         
-        return Int(result)
+        return result.hashValue
     }
 
     public var description: String {
@@ -70,13 +77,18 @@ public final class IntMP: SignedIntegerType{
     
     public func distanceTo(other: IntMP) -> IntMP {
         var value = IntMP()
-        __gmpz_sub(value.gmpz_p, self.gmpz_p, other.gmpz_p)
+
+        __gmpz_sub(value.gmpz_p, other.gmpz_p, gmpz_p)
 
         return value
     }
 
-    public func advancedBy(n: IntMP) -> Self {
-        return self
+    public func advancedBy(n: IntMP) -> IntMP {
+        var result = IntMP()
+        
+        __gmpz_add(result.gmpz_p, gmpz_p, n.gmpz_p)
+        
+        return result
     }
 
 
@@ -160,95 +172,141 @@ public func ==(lhs: Int, rhs: IntMP) -> Bool {
 }
 
 public func <=(lhs: IntMP, rhs: IntMP) -> Bool {
-    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) == 0
+    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) <= 0
 }
 
 
 public func <=(lhs: IntMP, rhs: Int) -> Bool {
-    return __gmpz_cmp_si(lhs.gmpz_p, rhs) == 0
+    return __gmpz_cmp_si(lhs.gmpz_p, rhs) <= 0
 }
 
 public func <=(lhs: Int, rhs: IntMP) -> Bool {
-    return __gmpz_cmp_si(rhs.gmpz_p, lhs) == 0
+    return __gmpz_cmp_si(rhs.gmpz_p, lhs) >= 0
 }
 
 public func >=(lhs: IntMP, rhs: IntMP) -> Bool {
-    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) == 0
+    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) >= 0
 }
 
 
 public func >=(lhs: IntMP, rhs: Int) -> Bool {
-    return __gmpz_cmp_si(lhs.gmpz_p, rhs) == 0
+    return __gmpz_cmp_si(lhs.gmpz_p, rhs) >= 0
 }
 
 public func >=(lhs: Int, rhs: IntMP) -> Bool {
-    return __gmpz_cmp_si(rhs.gmpz_p, lhs) == 0
+    return __gmpz_cmp_si(rhs.gmpz_p, lhs) <= 0
 }
 
 public func <(lhs: IntMP, rhs: IntMP) -> Bool {
-    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) == 0
+    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) < 0
 }
 
 
 public func <(lhs: IntMP, rhs: Int) -> Bool {
-    return __gmpz_cmp_si(lhs.gmpz_p, rhs) == 0
+    return __gmpz_cmp_si(lhs.gmpz_p, rhs) < 0
 }
 
 public func <(lhs: Int, rhs: IntMP) -> Bool {
-    return __gmpz_cmp_si(rhs.gmpz_p, lhs) == 0
+    return __gmpz_cmp_si(rhs.gmpz_p, lhs) > 0
 }
 
 public func >(lhs: IntMP, rhs: IntMP) -> Bool {
-    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) == 0
+    return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) > 0
 }
 
 
 public func >(lhs: IntMP, rhs: Int) -> Bool {
-    return __gmpz_cmp_si(lhs.gmpz_p, rhs) == 0
+    return __gmpz_cmp_si(lhs.gmpz_p, rhs) > 0
 }
 
 public func >(lhs: Int, rhs: IntMP) -> Bool {
-    return __gmpz_cmp_si(rhs.gmpz_p, lhs) == 0
+    return __gmpz_cmp_si(rhs.gmpz_p, lhs) < 0
 }
 
 public func &(lhs: IntMP, rhs: IntMP) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    
+    __gmpz_and(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+    
+    return result
 }
 
 public func &(lhs: IntMP, rhs: Int) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_and(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return result
 }
 
 public func &(lhs: Int, rhs: IntMP) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_and(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return result
 }
 
 public func |(lhs: IntMP, rhs: IntMP) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    
+    __gmpz_ior(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+    
+    return result
 }
 
 public func |(lhs: IntMP, rhs: Int) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_ior(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return result
 }
 
 public func |(lhs: Int, rhs: IntMP) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_ior(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return result
 }
 
 public func ^(lhs: IntMP, rhs: IntMP) -> IntMP {
-    return IntMP(0)
-}
-
-public func ^(lhs: Int, rhs: IntMP) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    
+    __gmpz_xor(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+    
+    return result
 }
 
 public func ^(lhs: IntMP, rhs: Int) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_xor(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return result
+}
+
+public func ^(lhs: Int, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_xor(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return result
 }
 
 public prefix func ~(x: IntMP) -> IntMP {
-    return IntMP(0)
+    var result = IntMP()
+    
+    __gmpz_com(result.gmpz_p, x.gmpz_p)
+    
+    return result
 }
 
 public func +(lhs: IntMP, rhs: IntMP) -> IntMP {
@@ -308,7 +366,7 @@ public func -(lhs: Int, rhs: IntMP) -> IntMP {
     var result = IntMP()
     
     if lhs < 0 {
-        __gmpz_add_ui(result.gmpz_p, rhs.gmpz_p, UInt(lhs))
+        __gmpz_add_ui(result.gmpz_p, rhs.gmpz_p, UInt(-lhs))
         __gmpz_neg(result.gmpz_p, result.gmpz_p)
     } else {
         __gmpz_ui_sub(result.gmpz_p, UInt(lhs), rhs.gmpz_p)
@@ -391,4 +449,10 @@ public func %(lhs: Int, rhs: IntMP) -> IntMP {
     __gmpz_tdiv_r(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
     return q
+}
+
+extension Int {
+    public init(_ value:IntMP) {
+        self = Int(__gmpz_get_si(value.gmpz_p))
+    }
 }

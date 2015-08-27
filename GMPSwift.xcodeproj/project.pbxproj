@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4555CF91B8EEF3A00B1B8CF /* GMPSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F4F55B241B8E35780072F09B /* GMPSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; };
-		F4F55B2B1B8E35780072F09B /* GMPSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B2A1B8E35780072F09B /* GMPSwiftTests.swift */; };
+		F4F55B2B1B8E35780072F09B /* IntMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B2A1B8E35780072F09B /* IntMPTests.swift */; };
 		F4F55B381B8E36050072F09B /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
 		F4F55B391B8E36050072F09B /* gmp.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F55B371B8E36050072F09B /* gmp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4F55B3D1B8E36220072F09B /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; };
@@ -28,11 +29,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
+		F4555CFA1B8EFC7900B1B8CF /* IntegerProtocolsCheck.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = IntegerProtocolsCheck.playground; sourceTree = "<group>"; };
 		F4F55B181B8E35780072F09B /* GMPSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMPSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F55B1C1B8E35780072F09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4F55B231B8E35780072F09B /* GMPSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMPSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F55B291B8E35780072F09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4F55B2A1B8E35780072F09B /* GMPSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMPSwiftTests.swift; sourceTree = "<group>"; };
+		F4F55B2A1B8E35780072F09B /* IntMPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntMPTests.swift; sourceTree = "<group>"; };
 		F4F55B341B8E35CD0072F09B /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "gmp-man-6.0.0a.pdf"; path = "GMP/Common/gmp-man-6.0.0a.pdf"; sourceTree = "<group>"; };
 		F4F55B371B8E36050072F09B /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gmp.h; path = GMP/Common/gmp.h; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 		F4F55B0E1B8E35780072F09B = {
 			isa = PBXGroup;
 			children = (
+				F4555CFA1B8EFC7900B1B8CF /* IntegerProtocolsCheck.playground */,
 				F4F55B3A1B8E36090072F09B /* GMP */,
 				F4F55B1A1B8E35780072F09B /* GMPSwift */,
 				F4F55B271B8E35780072F09B /* GMPSwiftTests */,
@@ -85,6 +89,7 @@
 		F4F55B1A1B8E35780072F09B /* GMPSwift */ = {
 			isa = PBXGroup;
 			children = (
+				F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */,
 				F4F55B431B8E39720072F09B /* GMPSwift-Swift.h */,
 				F4F55B3F1B8E36A80072F09B /* IntMP.swift */,
 				F4F55B1B1B8E35780072F09B /* Supporting Files */,
@@ -104,7 +109,7 @@
 		F4F55B271B8E35780072F09B /* GMPSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				F4F55B2A1B8E35780072F09B /* GMPSwiftTests.swift */,
+				F4F55B2A1B8E35780072F09B /* IntMPTests.swift */,
 				F4F55B281B8E35780072F09B /* Supporting Files */,
 			);
 			path = GMPSwiftTests;
@@ -138,6 +143,7 @@
 			files = (
 				F4F55B391B8E36050072F09B /* gmp.h in Headers */,
 				F4F55B441B8E39720072F09B /* GMPSwift-Swift.h in Headers */,
+				F4555CF91B8EEF3A00B1B8CF /* GMPSwift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F55B2B1B8E35780072F09B /* GMPSwiftTests.swift in Sources */,
+				F4F55B2B1B8E35780072F09B /* IntMPTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +448,7 @@
 				F4F55B301B8E35780072F09B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4F55B311B8E35780072F09B /* Build configuration list for PBXNativeTarget "GMPSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +457,7 @@
 				F4F55B331B8E35780072F09B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
