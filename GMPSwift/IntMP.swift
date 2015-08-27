@@ -30,6 +30,11 @@ see https://www.gnu.org/licenses/.  */
 
 import Swift
 
+infix operator ** {
+associativity left
+precedence 160
+}
+
 public final class IntMP: SignedIntegerType{
     var gmpz_p = mpz_ptr.alloc(1)
     
@@ -45,6 +50,10 @@ public final class IntMP: SignedIntegerType{
     /// Create an instance initialized to `value`.
     public init(_ value: Int) {
         __gmpz_init_set_si(gmpz_p, value)
+    }
+    
+    public init(_ value: UInt) {
+        __gmpz_init_set_ui(gmpz_p, value)
     }
     
     public init(_ value: IntMax) {
@@ -189,6 +198,14 @@ public func ==(lhs: IntMP, rhs: Int) -> Bool {
     return __gmpz_cmp_si(lhs.gmpz_p, rhs) == 0
 }
 
+public func ==(lhs: UInt, rhs: IntMP) -> Bool {
+    return __gmpz_cmp_ui(rhs.gmpz_p, lhs) == 0
+}
+
+public func ==(lhs: IntMP, rhs: UInt) -> Bool {
+    return __gmpz_cmp_ui(lhs.gmpz_p, rhs) == 0
+}
+
 public func ==(lhs: Int, rhs: IntMP) -> Bool {
     return __gmpz_cmp_si(rhs.gmpz_p, lhs) == 0
 }
@@ -206,6 +223,14 @@ public func <=(lhs: Int, rhs: IntMP) -> Bool {
     return __gmpz_cmp_si(rhs.gmpz_p, lhs) >= 0
 }
 
+public func <=(lhs: IntMP, rhs: UInt) -> Bool {
+    return __gmpz_cmp_ui(lhs.gmpz_p, rhs) <= 0
+}
+
+public func <=(lhs: UInt, rhs: IntMP) -> Bool {
+    return __gmpz_cmp_ui(rhs.gmpz_p, lhs) >= 0
+}
+
 public func >=(lhs: IntMP, rhs: IntMP) -> Bool {
     return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) >= 0
 }
@@ -219,10 +244,17 @@ public func >=(lhs: Int, rhs: IntMP) -> Bool {
     return __gmpz_cmp_si(rhs.gmpz_p, lhs) <= 0
 }
 
+public func >=(lhs: IntMP, rhs: UInt) -> Bool {
+    return __gmpz_cmp_ui(lhs.gmpz_p, rhs) >= 0
+}
+
+public func >=(lhs: UInt, rhs: IntMP) -> Bool {
+    return __gmpz_cmp_ui(rhs.gmpz_p, lhs) <= 0
+}
+
 public func <(lhs: IntMP, rhs: IntMP) -> Bool {
     return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) < 0
 }
-
 
 public func <(lhs: IntMP, rhs: Int) -> Bool {
     return __gmpz_cmp_si(lhs.gmpz_p, rhs) < 0
@@ -232,10 +264,17 @@ public func <(lhs: Int, rhs: IntMP) -> Bool {
     return __gmpz_cmp_si(rhs.gmpz_p, lhs) > 0
 }
 
+public func <(lhs: IntMP, rhs: UInt) -> Bool {
+    return __gmpz_cmp_ui(lhs.gmpz_p, rhs) < 0
+}
+
+public func <(lhs: UInt, rhs: IntMP) -> Bool {
+    return __gmpz_cmp_ui(rhs.gmpz_p, lhs) > 0
+}
+
 public func >(lhs: IntMP, rhs: IntMP) -> Bool {
     return __gmpz_cmp(lhs.gmpz_p, rhs.gmpz_p) > 0
 }
-
 
 public func >(lhs: IntMP, rhs: Int) -> Bool {
     return __gmpz_cmp_si(lhs.gmpz_p, rhs) > 0
@@ -243,6 +282,14 @@ public func >(lhs: IntMP, rhs: Int) -> Bool {
 
 public func >(lhs: Int, rhs: IntMP) -> Bool {
     return __gmpz_cmp_si(rhs.gmpz_p, lhs) < 0
+}
+
+public func >(lhs: IntMP, rhs: UInt) -> Bool {
+    return __gmpz_cmp_ui(lhs.gmpz_p, rhs) > 0
+}
+
+public func >(lhs: UInt, rhs: IntMP) -> Bool {
+    return __gmpz_cmp_ui(rhs.gmpz_p, lhs) < 0
 }
 
 public func &(lhs: IntMP, rhs: IntMP) -> IntMP {
@@ -263,6 +310,24 @@ public func &(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func &(lhs: Int, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_and(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return result
+}
+
+public func &(lhs: IntMP, rhs: UInt) -> IntMP {
+    var result = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_and(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return result
+}
+
+public func &(lhs: UInt, rhs: IntMP) -> IntMP {
     var result = IntMP()
     var lhsMP = IntMP(lhs)
     
@@ -297,6 +362,24 @@ public func |(lhs: Int, rhs: IntMP) -> IntMP {
     return result
 }
 
+public func |(lhs: IntMP, rhs: UInt) -> IntMP {
+    var result = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_ior(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return result
+}
+
+public func |(lhs: UInt, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_ior(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return result
+}
+
 public func ^(lhs: IntMP, rhs: IntMP) -> IntMP {
     var result = IntMP()
     
@@ -315,6 +398,24 @@ public func ^(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func ^(lhs: Int, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_xor(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return result
+}
+
+public func ^(lhs: IntMP, rhs: UInt) -> IntMP {
+    var result = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_xor(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return result
+}
+
+public func ^(lhs: UInt, rhs: IntMP) -> IntMP {
     var result = IntMP()
     var lhsMP = IntMP(lhs)
     
@@ -364,6 +465,22 @@ public func +(lhs: Int, rhs: IntMP) -> IntMP {
     return result
 }
 
+public func +(lhs: IntMP, rhs: UInt) -> IntMP {
+    var result = IntMP()
+    
+    __gmpz_add_ui(result.gmpz_p, lhs.gmpz_p, rhs)
+    
+    return result
+}
+
+public func +(lhs: UInt, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    
+    __gmpz_add_ui(result.gmpz_p, rhs.gmpz_p, lhs)
+    
+    return result
+}
+
 public func -(lhs: IntMP, rhs: IntMP) -> IntMP {
     var result = IntMP()
     
@@ -397,6 +514,22 @@ public func -(lhs: Int, rhs: IntMP) -> IntMP {
     return result
 }
 
+public func -(lhs: IntMP, rhs: UInt) -> IntMP {
+    var result = IntMP()
+    
+    __gmpz_sub_ui(result.gmpz_p, lhs.gmpz_p, rhs)
+    
+    return result
+}
+
+public func -(lhs: UInt, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    
+    __gmpz_ui_sub(result.gmpz_p, lhs, rhs.gmpz_p)
+    
+    return result
+}
+
 public func *(lhs: IntMP, rhs: IntMP) -> IntMP {
     var result = IntMP()
     
@@ -421,6 +554,22 @@ public func *(lhs: Int, rhs: IntMP) -> IntMP {
     return result
 }
 
+public func *(lhs: IntMP, rhs: UInt) -> IntMP {
+    var result = IntMP()
+    
+    __gmpz_mul_ui(result.gmpz_p, lhs.gmpz_p, rhs)
+    
+    return result
+}
+
+public func *(lhs: UInt, rhs: IntMP) -> IntMP {
+    var result = IntMP()
+    
+    __gmpz_mul_ui(result.gmpz_p, rhs.gmpz_p, lhs)
+    
+    return result
+}
+
 public func /(lhs: IntMP, rhs: IntMP) -> IntMP {
     var q = IntMP()
     
@@ -439,6 +588,24 @@ public func /(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func /(lhs: Int, rhs: IntMP) -> IntMP {
+    var q = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_tdiv_q(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return q
+}
+
+public func /(lhs: IntMP, rhs: UInt) -> IntMP {
+    var q = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_tdiv_q(q.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return q
+}
+
+public func /(lhs: UInt, rhs: IntMP) -> IntMP {
     var q = IntMP()
     var lhsMP = IntMP(lhs)
     
@@ -473,8 +640,192 @@ public func %(lhs: Int, rhs: IntMP) -> IntMP {
     return q
 }
 
+public func %(lhs: IntMP, rhs: UInt) -> IntMP {
+    var q = IntMP()
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_tdiv_r(q.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+    
+    return q
+}
+
+public func %(lhs: UInt, rhs: IntMP) -> IntMP {
+    var q = IntMP()
+    var lhsMP = IntMP(lhs)
+    
+    __gmpz_tdiv_r(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
+    
+    return q
+}
+
+public func +=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_add(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func +=(inout lhs: IntMP, rhs: Int) {
+    if rhs < 0 {
+        __gmpz_sub_ui(lhs.gmpz_p, lhs.gmpz_p, UInt(-rhs))
+    } else {
+        __gmpz_add_ui(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
+    }
+}
+
+public func +=(inout lhs: IntMP, rhs: UInt) {
+    __gmpz_add_ui(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
+public func -=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_sub(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func -=(inout lhs: IntMP, rhs: Int) {
+    if rhs < 0 {
+        __gmpz_add_ui(lhs.gmpz_p, lhs.gmpz_p, UInt(-rhs))
+    } else {
+        __gmpz_sub_ui(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
+    }
+}
+
+public func -=(inout lhs: IntMP, rhs: UInt) {
+    __gmpz_sub_ui(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
+}
+
+public func *=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_mul(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func *=(inout lhs: IntMP, rhs: Int) {
+    __gmpz_mul_si(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
+public func *=(inout lhs: IntMP, rhs: UInt) {
+    __gmpz_mul_ui(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
+public func /=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_tdiv_q(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func /=(inout lhs: IntMP, rhs: Int) {
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_tdiv_q(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func /=(inout lhs: IntMP, rhs: UInt) {
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_tdiv_q(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func %=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_tdiv_r(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func %=(inout lhs: IntMP, rhs: Int) {
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_tdiv_r(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func %=(inout lhs: IntMP, rhs: UInt) {
+    var rhsMP = IntMP(rhs)
+    
+    __gmpz_tdiv_r(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func <<(lhs: IntMP, rhs: UInt) -> IntMP {
+    var q = IntMP()
+    
+    __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, rhs)
+    
+    return q
+}
+
+public func >>(lhs: IntMP, rhs: UInt) -> IntMP {
+    var q = IntMP()
+    
+    __gmpz_fdiv_q_2exp(q.gmpz_p, lhs.gmpz_p, rhs)
+    
+    return q
+}
+
+public func <<=(inout lhs: IntMP, rhs: UInt) {
+    __gmpz_mul_2exp(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
+public func >>=(inout lhs: IntMP, rhs: UInt) {
+    __gmpz_fdiv_q_2exp(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
 extension Int {
     public init(_ value:IntMP) {
         self = Int(__gmpz_get_si(value.gmpz_p))
     }
+}
+
+public func **(base: Int, exp: Int) -> (Int) {
+    var result = IntMP()
+    
+    if exp > 0 {
+        if base >= 0 {
+            __gmpz_ui_pow_ui(result.gmpz_p, UInt(base), UInt(exp))
+        } else {
+            __gmpz_ui_pow_ui(result.gmpz_p, UInt(-base), UInt(exp))
+            
+            if exp & 1 == 1 {
+                __gmpz_neg(result.gmpz_p, result.gmpz_p)
+            }
+        }
+    } else if exp < 0 {
+        if base == 1 {
+            return 1
+        } else {
+            return 0
+        }
+    } else {
+        return 1
+    }
+    
+    return __gmpz_get_si(result.gmpz_p)
+}
+
+extension UInt {
+    public init(_ value:IntMP) {
+        self = UInt(__gmpz_get_ui(value.gmpz_p))
+    }
+}
+
+public func **(base: UInt, exp: UInt) -> (UInt) {
+    var result = IntMP()
+
+    __gmpz_ui_pow_ui(result.gmpz_p, base, exp)
+    
+    return __gmpz_get_ui(result.gmpz_p)
+}
+
+public func **(base: IntMP, exp: IntMP) -> (IntMP) {
+    var result = IntMP()
+    
+    if exp > 0 {
+        if base >= 0 {
+            __gmpz_pow_ui(result.gmpz_p, base.gmpz_p, UInt(exp))
+        } else {
+            __gmpz_pow_ui(result.gmpz_p, (-base).gmpz_p, UInt(exp))
+            
+            if exp & 1 == 1 {
+                __gmpz_neg(result.gmpz_p, result.gmpz_p)
+            }
+        }
+    } else if exp < 0 {
+        if base == 1 {
+            return IntMP(1)
+        } else {
+            return IntMP(0)
+        }
+    } else {
+        return IntMP(1)
+    }
+    
+    return result
 }

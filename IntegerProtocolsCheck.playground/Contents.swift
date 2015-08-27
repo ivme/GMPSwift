@@ -5,14 +5,12 @@ import GMPSwift
 
 var str = "Hello, playground"
 
-let i = 13
-let j = -27
+let i: Int = 13
+let j: Int = 5
 
 i.distanceTo(j)
-i.advancedBy(j)
 
-let imp = IntMP(i)
-
-let h = Int(imp)
+i << 3
+i << -3
 
 

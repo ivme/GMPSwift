@@ -28,7 +28,6 @@ You should have received copies of the GNU General Public License and the
 GNU Lesser General Public License along with the GNU MP Library.  If not,
 see https://www.gnu.org/licenses/.  */
 
-import Cocoa
 import XCTest
 import GMPSwift
 
@@ -101,6 +100,8 @@ class IntMPTests: XCTestCase {
         XCTAssert(!(lhsInt == rhsMP), "Pass")
         XCTAssert(lhsMP == lhsMP, "Pass")
         XCTAssert(rhsMP == rhsMP, "Pass")
+        XCTAssert(lhsMP == UInt(lhsMP), "Pass")
+        XCTAssert(UInt(rhsMP) == rhsMP, "Pass")
     }
     
     func testGreaterEqual() {
@@ -118,6 +119,13 @@ class IntMPTests: XCTestCase {
         XCTAssert(!(rhsMP >= lhsMP), "Pass")
         XCTAssert(!(rhsInt >= lhsMP), "Pass")
         XCTAssert(!(rhsMP >= lhsInt), "Pass")
+        XCTAssert(lhsMP >= UInt(rhsInt), "Pass")
+        XCTAssert(UInt(lhsInt) >= rhsMP, "Pass")
+        XCTAssert(lhsMP >= UInt(lhsMP), "Pass")
+        XCTAssert(UInt(rhsMP) >= rhsMP, "Pass")
+        XCTAssert(!(UInt(rhsMP) >= lhsMP), "Pass")
+        XCTAssert(!(UInt(rhsInt) >= lhsMP), "Pass")
+        XCTAssert(!(rhsMP >= UInt(lhsInt)), "Pass")
     }
     
     func testLesserEqual() {
@@ -135,6 +143,13 @@ class IntMPTests: XCTestCase {
         XCTAssert(!(rhsMP <= lhsMP), "Pass")
         XCTAssert(!(rhsInt <= lhsMP), "Pass")
         XCTAssert(!(rhsMP <= lhsInt), "Pass")
+        XCTAssert(lhsMP <= UInt(rhsInt), "Pass")
+        XCTAssert(UInt(lhsInt) <= rhsMP, "Pass")
+        XCTAssert(lhsMP <= UInt(lhsMP), "Pass")
+        XCTAssert(UInt(rhsMP) <= rhsMP, "Pass")
+        XCTAssert(!(UInt(rhsMP) <= lhsMP), "Pass")
+        XCTAssert(!(UInt(rhsInt) <= lhsMP), "Pass")
+        XCTAssert(!(rhsMP <= UInt(lhsInt)), "Pass")
     }
     
     func testGreater() {
@@ -152,6 +167,13 @@ class IntMPTests: XCTestCase {
         XCTAssert(!(rhsMP > lhsMP), "Pass")
         XCTAssert(!(rhsInt > lhsMP), "Pass")
         XCTAssert(!(rhsMP > lhsInt), "Pass")
+        XCTAssert(lhsMP > UInt(rhsInt), "Pass")
+        XCTAssert(UInt(lhsInt) > rhsMP, "Pass")
+        XCTAssert(!(lhsMP > UInt(lhsMP)), "Pass")
+        XCTAssert(!(UInt(rhsMP) > rhsMP), "Pass")
+        XCTAssert(!(UInt(rhsMP) > lhsMP), "Pass")
+        XCTAssert(!(UInt(rhsInt) > lhsMP), "Pass")
+        XCTAssert(!(rhsMP > UInt(lhsInt)), "Pass")
     }
     
     func testLesser() {
@@ -169,6 +191,13 @@ class IntMPTests: XCTestCase {
         XCTAssert(!(rhsMP < lhsMP), "Pass")
         XCTAssert(!(rhsInt < lhsMP), "Pass")
         XCTAssert(!(rhsMP < lhsInt), "Pass")
+        XCTAssert(lhsMP < UInt(rhsInt), "Pass")
+        XCTAssert(UInt(lhsInt) < rhsMP, "Pass")
+        XCTAssert(!(lhsMP < UInt(lhsMP)), "Pass")
+        XCTAssert(!(UInt(rhsMP) < rhsMP), "Pass")
+        XCTAssert(!(UInt(rhsMP) < lhsMP), "Pass")
+        XCTAssert(!(UInt(rhsInt) < lhsMP), "Pass")
+        XCTAssert(!(rhsMP < UInt(lhsInt)), "Pass")
     }
     
     func testAnd() {
@@ -181,6 +210,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsMP & rhsMP) == (lhsInt & rhsInt), "Pass")
         XCTAssert((lhsMP & rhsInt) == (lhsInt & rhsInt), "Pass")
         XCTAssert((lhsInt & rhsMP) == (lhsInt & rhsInt), "Pass")
+        XCTAssert((lhsMP & UInt(rhsInt)) == lhsInt & rhsInt, "Pass")
+        XCTAssert((UInt(lhsInt) & rhsMP) == lhsInt & rhsInt, "Pass")
     }
     
     func testOr() {
@@ -193,6 +224,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsMP | rhsMP) == (lhsInt | rhsInt), "Pass")
         XCTAssert((lhsMP | rhsInt) == (lhsInt | rhsInt), "Pass")
         XCTAssert((lhsInt | rhsMP) == (lhsInt | rhsInt), "Pass")
+        XCTAssert((lhsMP | UInt(rhsInt)) == lhsInt | rhsInt, "Pass")
+        XCTAssert((UInt(lhsInt) | rhsMP) == lhsInt | rhsInt, "Pass")
     }
     
     func testXor() {
@@ -205,6 +238,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsMP ^ rhsMP) == (lhsInt ^ rhsInt), "Pass")
         XCTAssert((lhsMP ^ rhsInt) == (lhsInt ^ rhsInt), "Pass")
         XCTAssert((lhsInt ^ rhsMP) == (lhsInt ^ rhsInt), "Pass")
+        XCTAssert((lhsMP ^ UInt(rhsInt)) == lhsInt ^ rhsInt, "Pass")
+        XCTAssert((UInt(lhsInt) ^ rhsMP) == lhsInt ^ rhsInt, "Pass")
     }
     
     func testComp() {
@@ -231,6 +266,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsPInt + rhsPMP) == (lhsPInt + rhsPInt), "Pass")
         XCTAssert((lhsPMP + nInt) == (lhsPInt + nInt), "Pass")
         XCTAssert((nInt + rhsPMP) == (nInt + rhsPInt), "Pass")
+        XCTAssert((lhsPMP + UInt(rhsPInt)) == (lhsPInt + rhsPInt), "Pass")
+        XCTAssert((UInt(lhsPInt) + rhsPMP) == (lhsPInt + rhsPInt), "Pass")
     }
     
     func testSub() {
@@ -246,6 +283,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsPInt - rhsPMP) == (lhsPInt - rhsPInt), "Pass")
         XCTAssert((lhsPMP - nInt) == (lhsPInt - nInt), "Pass")
         XCTAssert((nInt - rhsPMP) == (nInt - rhsPInt), "Pass")
+        XCTAssert((lhsPMP - UInt(rhsPInt)) == (lhsPInt - rhsPInt), "Pass")
+        XCTAssert((UInt(lhsPInt) - rhsPMP) == (lhsPInt - rhsPInt), "Pass")
     }
     
     func testMul() {
@@ -261,6 +300,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsPInt * rhsPMP) == (lhsPInt * rhsPInt), "Pass")
         XCTAssert((lhsPMP * nInt) == (lhsPInt * nInt), "Pass")
         XCTAssert((nInt * rhsPMP) == (nInt * rhsPInt), "Pass")
+        XCTAssert((lhsPMP * UInt(rhsPInt)) == (lhsPInt * rhsPInt), "Pass")
+        XCTAssert((UInt(lhsPInt) * rhsPMP) == (lhsPInt * rhsPInt), "Pass")
     }
     
     func testDiv() {
@@ -276,6 +317,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsPInt / rhsPMP) == (lhsPInt / rhsPInt), "Pass")
         XCTAssert((lhsPMP / nInt) == (lhsPInt / nInt), "Pass")
         XCTAssert((nInt / rhsPMP) == (nInt / rhsPInt), "Pass")
+        XCTAssert((lhsPMP / UInt(rhsPInt)) == (lhsPInt / rhsPInt), "Pass")
+        XCTAssert((UInt(lhsPInt) / rhsPMP) == (lhsPInt / rhsPInt), "Pass")
     }
     
     func testMod() {
@@ -291,6 +334,8 @@ class IntMPTests: XCTestCase {
         XCTAssert((lhsPInt % rhsPMP) == (lhsPInt % rhsPInt), "Pass")
         XCTAssert((lhsPMP % nInt) == (lhsPInt % nInt), "Pass")
         XCTAssert((nInt % rhsPMP) == (nInt % rhsPInt), "Pass")
+        XCTAssert((lhsPMP % UInt(rhsPInt)) == (lhsPInt % rhsPInt), "Pass")
+        XCTAssert((UInt(lhsPInt) % rhsPMP) == (lhsPInt % rhsPInt), "Pass")
     }
     
     func testNeg() {
@@ -302,6 +347,126 @@ class IntMPTests: XCTestCase {
         
         XCTAssert((-lhsMP) == (-lhsInt), "Pass")
         XCTAssert((-rhsMP) == (-rhsInt), "Pass")
+    }
+    
+    func testAddAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt = 56
+        var lhsPMP = IntMP(lhsPInt)
+        let rhsPMP = IntMP(rhsPInt)
+        var nInt = -33
+        
+        lhsPMP += rhsPMP
+        lhsPInt += rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP += UInt(rhsPInt)
+        lhsPInt += rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP += nInt
+        lhsPInt += nInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+    }
+    
+    func testSubAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt = 56
+        var lhsPMP = IntMP(lhsPInt)
+        let rhsPMP = IntMP(rhsPInt)
+        var nInt = -33
+        
+        lhsPMP -= rhsPMP
+        lhsPInt -= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP -= UInt(rhsPInt)
+        lhsPInt -= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP -= nInt
+        lhsPInt -= nInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+    }
+    
+    func testMulAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt = 56
+        var lhsPMP = IntMP(lhsPInt)
+        let rhsPMP = IntMP(rhsPInt)
+        var nInt = -33
+        
+        lhsPMP *= rhsPMP
+        lhsPInt *= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP *= UInt(rhsPInt)
+        lhsPInt *= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP *= nInt
+        lhsPInt *= nInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+    }
+    
+    func testDivAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt = 56
+        var lhsPMP = IntMP(lhsPInt)
+        let rhsPMP = IntMP(rhsPInt)
+        var nInt = -33
+        
+        lhsPMP /= rhsPMP
+        lhsPInt /= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP /= UInt(rhsPInt)
+        lhsPInt /= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP /= nInt
+        lhsPInt /= nInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+    }
+    
+    func testRemAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt = 56
+        var lhsPMP = IntMP(lhsPInt)
+        let rhsPMP = IntMP(rhsPInt)
+        var nInt = -33
+        
+        lhsPMP %= rhsPMP
+        lhsPInt %= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP %= UInt(rhsPInt)
+        lhsPInt %= rhsPInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP %= nInt
+        lhsPInt %= nInt
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
     }
     
     func testDescriptionVar() {
@@ -339,6 +504,16 @@ class IntMPTests: XCTestCase {
         XCTAssert(aInt == a, "Pass")
     }
     
+    func testUIntUInt() {
+        // This is an example of a functional test case.
+        let a: UInt = 3
+        let aMP = IntMP(a)
+        let aInt = UInt(aMP)
+        
+        XCTAssert(aMP == aInt, "Pass")
+        XCTAssert(aInt == a, "Pass")
+    }
+    
     func testDistanceTo() {
         // This is an example of a functional test case.
         let lhsInt = -27
@@ -363,6 +538,66 @@ class IntMPTests: XCTestCase {
         
         XCTAssert(lhsMP.advancedBy(rhsMP) == lhsInt.advancedBy(rhsInt), "Pass")
         XCTAssert(rhsMP.advancedBy(lhsMP) == rhsInt.advancedBy(lhsInt), "Pass")
+    }
+    
+    func testShiftLeft() {
+        // This is an example of a functional test case.
+        let lhsNInt = -27
+        let rhsInt: UInt = 4
+        let lhsNMP = IntMP(lhsNInt)
+        let shiftNMP = lhsNMP << rhsInt
+        let shiftNInt = lhsNInt << Int(rhsInt)
+        XCTAssert(shiftNMP == shiftNInt, "Pass")
+        let shiftPMP = (-lhsNMP) << rhsInt
+        let shiftPInt = (-lhsNInt) << Int(rhsInt)
+        XCTAssert(shiftPMP == shiftPInt, "Pass")
+    }
+    
+    func testShiftRight() {
+        // This is an example of a functional test case.
+        let lhsNInt = -27
+        let rhsInt: UInt = 4
+        let lhsNMP = IntMP(lhsNInt)
+        let shiftNMP = lhsNMP >> rhsInt
+        let shiftNInt = lhsNInt >> Int(rhsInt)
+        XCTAssert(shiftNMP == shiftNInt, "Pass")
+        let shiftPMP = (-lhsNMP) >> rhsInt
+        let shiftPInt = (-lhsNInt) >> Int(rhsInt)
+        XCTAssert(shiftPMP == shiftPInt, "Pass")
+    }
+    
+    func testShiftLeftAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt: UInt = 3
+        var lhsPMP = IntMP(lhsPInt)
+        
+        lhsPMP <<= rhsPInt
+        lhsPInt <<= Int(rhsPInt)
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP <<= rhsPInt
+        lhsPInt <<= Int(rhsPInt)
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+    }
+    
+    func testShiftRightAssign() {
+        // This is an example of a functional test case.
+        var lhsPInt = 27
+        let rhsPInt: UInt = 3
+        var lhsPMP = IntMP(lhsPInt)
+        
+        lhsPMP >>= rhsPInt
+        lhsPInt >>= Int(rhsPInt)
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP >>= rhsPInt
+        lhsPInt >>= Int(rhsPInt)
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
     }
     
     func testAllZeros() {
@@ -413,6 +648,97 @@ class IntMPTests: XCTestCase {
         self.measureBlock() {
             // Put the code you want to measure the time of here.
         }
+    }
+
+    func testPower() {
+        // This is an example of a functional test case.
+        var a = 3
+        var b = -5
+        var c: UInt = 4
+        
+        var acc = 1
+        for i in 0 ..< c {
+            acc *= a
+        }
+        
+        XCTAssert(UInt(a) ** c == UInt(acc), "Pass")
+        XCTAssert(IntMP(a) ** IntMP(c) == UInt(acc), "Pass")
+
+        acc = 1
+        for i in 0 ..< a {
+            acc *= b
+        }
+        var powN = Int(b) ** Int(a)
+        var powMP = IntMP(b) ** IntMP(a)
+        
+        XCTAssert(powN == Int(acc), "Pass")
+        XCTAssert(powMP == Int(acc), "Pass")
+        
+        a = 2
+        b = -1
+        
+        powN = Int(a) ** Int(b)
+        powMP = IntMP(a) ** IntMP(b)
+        
+        XCTAssert(powN == 0, "Pass")
+        XCTAssert(powMP == 0, "Pass")
+
+        a = 2
+        b = 0
+        
+        powN = Int(a) ** Int(b)
+        var powP = UInt(a) ** UInt(b)
+        powMP = IntMP(a) ** IntMP(b)
+        
+        XCTAssert(powN == 1, "Pass")
+        XCTAssert(powP == 1, "Pass")
+        XCTAssert(powMP == 1, "Pass")
+
+        a = 0
+        b = 2
+        
+        powN = Int(a) ** Int(b)
+        powP = UInt(a) ** UInt(b)
+        powMP = IntMP(a) ** IntMP(b)
+        
+        XCTAssert(powN == 0, "Pass")
+        XCTAssert(powP == 0, "Pass")
+        XCTAssert(powMP == 0, "Pass")
+
+        a = 2
+        b = 2
+
+        acc = 1
+        for i in 0 ..< a {
+            acc *= b
+        }
+        powN = Int(b) ** Int(a)
+        powP = UInt(b) ** UInt(a)
+        powMP = IntMP(b) ** IntMP(a)
+        
+        XCTAssert(powN == Int(acc), "Pass")
+        XCTAssert(powP == UInt(acc), "Pass")
+        XCTAssert(powMP == Int(acc), "Pass")
+
+        a = -2
+        b = 0
+        
+        powN = Int(a) ** Int(b)
+        powMP = IntMP(a) ** IntMP(b)
+        
+        XCTAssert(powN == 1, "Pass")
+        XCTAssert(powMP == 1, "Pass")
+
+        a = 0
+        b = 0
+        
+        powN = Int(a) ** Int(b)
+        powP = UInt(a) ** UInt(b)
+        powMP = IntMP(a) ** IntMP(b)
+        
+        XCTAssert(powN == 1, "Pass")
+        XCTAssert(powP == 1, "Pass")
+        XCTAssert(powMP == 1, "Pass")
     }
     
 }
