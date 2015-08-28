@@ -1,4 +1,4 @@
-/* IntMP tests for GNU multiple precision over Switch.   -*- mode: c -*-
+/* IntMP tests for GNU multiple precision on Switch.   -*- mode: c -*-
 
 Copyright 2015 Jose Maria Gomez Cama
 
@@ -542,42 +542,53 @@ class IntMPTests: XCTestCase {
     
     func testShiftLeft() {
         // This is an example of a functional test case.
-        let lhsNInt = -27
-        let rhsInt: UInt = 4
-        let lhsNMP = IntMP(lhsNInt)
-        let shiftNMP = lhsNMP << rhsInt
-        let shiftNInt = lhsNInt << Int(rhsInt)
-        XCTAssert(shiftNMP == shiftNInt, "Pass")
-        let shiftPMP = (-lhsNMP) << rhsInt
-        let shiftPInt = (-lhsNInt) << Int(rhsInt)
-        XCTAssert(shiftPMP == shiftPInt, "Pass")
+        let lhsInt = -27
+        let rhsInt = 4
+        var lhsMP = IntMP(lhsInt)
+        var shiftInt = lhsInt << Int(rhsInt)
+        XCTAssert(lhsMP << IntMP(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP << Int(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP << UInt(rhsInt) == shiftInt, "Pass")
+        lhsMP = -lhsMP
+        shiftInt = (-lhsInt) << rhsInt
+        XCTAssert(lhsMP << IntMP(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP << Int(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP << UInt(rhsInt) == shiftInt, "Pass")
     }
     
     func testShiftRight() {
         // This is an example of a functional test case.
-        let lhsNInt = -27
-        let rhsInt: UInt = 4
-        let lhsNMP = IntMP(lhsNInt)
-        let shiftNMP = lhsNMP >> rhsInt
-        let shiftNInt = lhsNInt >> Int(rhsInt)
-        XCTAssert(shiftNMP == shiftNInt, "Pass")
-        let shiftPMP = (-lhsNMP) >> rhsInt
-        let shiftPInt = (-lhsNInt) >> Int(rhsInt)
-        XCTAssert(shiftPMP == shiftPInt, "Pass")
+        let lhsInt = -27
+        let rhsInt = 4
+        var lhsMP = IntMP(lhsInt)
+        var shiftInt = lhsInt >> Int(rhsInt)
+        XCTAssert(lhsMP >> IntMP(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP >> Int(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP >> UInt(rhsInt) == shiftInt, "Pass")
+        lhsMP = -lhsMP
+        shiftInt = (-lhsInt) >> rhsInt
+        XCTAssert(lhsMP >> IntMP(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP >> Int(rhsInt) == shiftInt, "Pass")
+        XCTAssert(lhsMP >> UInt(rhsInt) == shiftInt, "Pass")
     }
     
     func testShiftLeftAssign() {
         // This is an example of a functional test case.
         var lhsPInt = 27
-        let rhsPInt: UInt = 3
+        let rhsPInt = 3
         var lhsPMP = IntMP(lhsPInt)
         
-        lhsPMP <<= rhsPInt
+        lhsPMP <<= IntMP(rhsPInt)
         lhsPInt <<= Int(rhsPInt)
         
         XCTAssert(lhsPMP == lhsPInt, "Pass")
         
-        lhsPMP <<= rhsPInt
+        lhsPMP <<= Int(rhsPInt)
+        lhsPInt <<= Int(rhsPInt)
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+
+        lhsPMP <<= UInt(rhsPInt)
         lhsPInt <<= Int(rhsPInt)
         
         XCTAssert(lhsPMP == lhsPInt, "Pass")
@@ -586,15 +597,20 @@ class IntMPTests: XCTestCase {
     func testShiftRightAssign() {
         // This is an example of a functional test case.
         var lhsPInt = 27
-        let rhsPInt: UInt = 3
+        let rhsPInt = 3
         var lhsPMP = IntMP(lhsPInt)
         
-        lhsPMP >>= rhsPInt
+        lhsPMP >>= IntMP(rhsPInt)
         lhsPInt >>= Int(rhsPInt)
         
         XCTAssert(lhsPMP == lhsPInt, "Pass")
         
-        lhsPMP >>= rhsPInt
+        lhsPMP >>= Int(rhsPInt)
+        lhsPInt >>= Int(rhsPInt)
+        
+        XCTAssert(lhsPMP == lhsPInt, "Pass")
+        
+        lhsPMP >>= UInt(rhsPInt)
         lhsPInt >>= Int(rhsPInt)
         
         XCTAssert(lhsPMP == lhsPInt, "Pass")
@@ -740,5 +756,4 @@ class IntMPTests: XCTestCase {
         XCTAssert(powP == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
     }
-    
 }

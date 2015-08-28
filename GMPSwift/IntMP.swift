@@ -1,4 +1,4 @@
-/* IntMP implementation for GNU multiple precision over Switch.   -*- mode: c -*-
+/* IntMP implementation for GNU multiple precision on Switch.   -*- mode: c -*-
 
 Copyright 2015 Jose Maria Gomez Cama
 
@@ -734,10 +734,42 @@ public func %=(inout lhs: IntMP, rhs: UInt) {
     __gmpz_tdiv_r(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
 }
 
+public func <<(lhs: IntMP, rhs: IntMP) -> IntMP {
+    var q = IntMP()
+    
+    __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
+    
+    return q
+}
+
+public func <<(lhs: IntMP, rhs: Int) -> IntMP {
+    var q = IntMP()
+    
+    __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
+    
+    return q
+}
+
 public func <<(lhs: IntMP, rhs: UInt) -> IntMP {
     var q = IntMP()
     
     __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, rhs)
+    
+    return q
+}
+
+public func >>(lhs: IntMP, rhs: IntMP) -> IntMP {
+    var q = IntMP()
+    
+    __gmpz_fdiv_q_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
+    
+    return q
+}
+
+public func >>(lhs: IntMP, rhs: Int) -> IntMP {
+    var q = IntMP()
+    
+    __gmpz_fdiv_q_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
     
     return q
 }
@@ -750,8 +782,24 @@ public func >>(lhs: IntMP, rhs: UInt) -> IntMP {
     return q
 }
 
+public func <<=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_mul_2exp(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
+}
+
+public func <<=(inout lhs: IntMP, rhs: Int) {
+    __gmpz_mul_2exp(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
+}
+
 public func <<=(inout lhs: IntMP, rhs: UInt) {
     __gmpz_mul_2exp(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
+public func >>=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_fdiv_q_2exp(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
+}
+
+public func >>=(inout lhs: IntMP, rhs: Int) {
+    __gmpz_fdiv_q_2exp(lhs.gmpz_p, lhs.gmpz_p, UInt(rhs))
 }
 
 public func >>=(inout lhs: IntMP, rhs: UInt) {

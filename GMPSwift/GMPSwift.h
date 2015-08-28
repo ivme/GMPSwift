@@ -1,4 +1,4 @@
-/* Dummy header for GNU multiple precision over Switch.   -*- mode: c -*-
+/* Dummy header for GNU multiple precision on Switch.   -*- mode: c -*-
  
  Copyright 2015 Jose Maria Gomez Cama
  
