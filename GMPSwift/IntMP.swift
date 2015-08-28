@@ -31,8 +31,13 @@ see https://www.gnu.org/licenses/.  */
 import Swift
 
 infix operator ** {
-associativity left
-precedence 160
+    associativity left
+    precedence 160
+}
+
+infix operator .. {
+    associativity none
+    precedence 135
 }
 
 public final class IntMP: SignedIntegerType{
@@ -100,6 +105,14 @@ public final class IntMP: SignedIntegerType{
 
     public var description: String {
         return String.fromCString(__gmpz_get_str(nil, 10, gmpz_p))!
+    }
+
+    public var debugDescription: String {
+        return "IntMP(" + description + ")"
+    }
+    
+    var quickLookObject: QuickLookObject? {
+        return QuickLookObject.Text(description)
     }
 
     public func description(base: Int) -> String {
@@ -804,52 +817,6 @@ public func >>=(inout lhs: IntMP, rhs: Int) {
 
 public func >>=(inout lhs: IntMP, rhs: UInt) {
     __gmpz_fdiv_q_2exp(lhs.gmpz_p, lhs.gmpz_p, rhs)
-}
-
-extension Int {
-    public init(_ value:IntMP) {
-        self = Int(__gmpz_get_si(value.gmpz_p))
-    }
-}
-
-public func **(base: Int, exp: Int) -> (Int) {
-    var result = IntMP()
-    
-    if exp > 0 {
-        if base >= 0 {
-            __gmpz_ui_pow_ui(result.gmpz_p, UInt(base), UInt(exp))
-        } else {
-            __gmpz_ui_pow_ui(result.gmpz_p, UInt(-base), UInt(exp))
-            
-            if exp & 1 == 1 {
-                __gmpz_neg(result.gmpz_p, result.gmpz_p)
-            }
-        }
-    } else if exp < 0 {
-        if base == 1 {
-            return 1
-        } else {
-            return 0
-        }
-    } else {
-        return 1
-    }
-    
-    return __gmpz_get_si(result.gmpz_p)
-}
-
-extension UInt {
-    public init(_ value:IntMP) {
-        self = UInt(__gmpz_get_ui(value.gmpz_p))
-    }
-}
-
-public func **(base: UInt, exp: UInt) -> (UInt) {
-    var result = IntMP()
-
-    __gmpz_ui_pow_ui(result.gmpz_p, base, exp)
-    
-    return __gmpz_get_ui(result.gmpz_p)
 }
 
 public func **(base: IntMP, exp: IntMP) -> (IntMP) {

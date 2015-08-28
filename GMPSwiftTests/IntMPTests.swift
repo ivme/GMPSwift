@@ -494,26 +494,6 @@ class IntMPTests: XCTestCase {
         XCTAssert(minMP.toIntMax() == min, "Pass")
     }
 
-    func testIntInt() {
-        // This is an example of a functional test case.
-        let a = 3
-        let aMP = IntMP(a)
-        let aInt = Int(aMP)
-        
-        XCTAssert(aMP == aInt, "Pass")
-        XCTAssert(aInt == a, "Pass")
-    }
-    
-    func testUIntUInt() {
-        // This is an example of a functional test case.
-        let a: UInt = 3
-        let aMP = IntMP(a)
-        let aInt = UInt(aMP)
-        
-        XCTAssert(aMP == aInt, "Pass")
-        XCTAssert(aInt == a, "Pass")
-    }
-    
     func testDistanceTo() {
         // This is an example of a functional test case.
         let lhsInt = -27
@@ -677,48 +657,35 @@ class IntMPTests: XCTestCase {
             acc *= a
         }
         
-        XCTAssert(UInt(a) ** c == UInt(acc), "Pass")
         XCTAssert(IntMP(a) ** IntMP(c) == UInt(acc), "Pass")
 
         acc = 1
         for i in 0 ..< a {
             acc *= b
         }
-        var powN = Int(b) ** Int(a)
         var powMP = IntMP(b) ** IntMP(a)
         
-        XCTAssert(powN == Int(acc), "Pass")
         XCTAssert(powMP == Int(acc), "Pass")
         
         a = 2
         b = -1
         
-        powN = Int(a) ** Int(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 0, "Pass")
         XCTAssert(powMP == 0, "Pass")
 
         a = 2
         b = 0
         
-        powN = Int(a) ** Int(b)
-        var powP = UInt(a) ** UInt(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 1, "Pass")
-        XCTAssert(powP == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
 
         a = 0
         b = 2
         
-        powN = Int(a) ** Int(b)
-        powP = UInt(a) ** UInt(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 0, "Pass")
-        XCTAssert(powP == 0, "Pass")
         XCTAssert(powMP == 0, "Pass")
 
         a = 2
@@ -728,32 +695,22 @@ class IntMPTests: XCTestCase {
         for i in 0 ..< a {
             acc *= b
         }
-        powN = Int(b) ** Int(a)
-        powP = UInt(b) ** UInt(a)
         powMP = IntMP(b) ** IntMP(a)
         
-        XCTAssert(powN == Int(acc), "Pass")
-        XCTAssert(powP == UInt(acc), "Pass")
         XCTAssert(powMP == Int(acc), "Pass")
 
         a = -2
         b = 0
         
-        powN = Int(a) ** Int(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
 
         a = 0
         b = 0
         
-        powN = Int(a) ** Int(b)
-        powP = UInt(a) ** UInt(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 1, "Pass")
-        XCTAssert(powP == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
     }
 }
