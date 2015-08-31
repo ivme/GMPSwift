@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F4555CF91B8EEF3A00B1B8CF /* GMPSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F48EDC351B94D7AF004BB3BC /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
+		F48EDC361B94DB2C004BB3BC /* libgmp.10.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; };
 		F498B32F1B905E190075FFF9 /* IntUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B32E1B905E190075FFF9 /* IntUInt.swift */; };
 		F498B3311B9062920075FFF9 /* IntUIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B3301B9062920075FFF9 /* IntUIntTests.swift */; };
-		F4EF1DF81B94C73600748DCC /* GMPSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F4F55B241B8E35780072F09B /* GMPSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; };
 		F4F55B2B1B8E35780072F09B /* IntMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B2A1B8E35780072F09B /* IntMPTests.swift */; };
-		F4F55B381B8E36050072F09B /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
 		F4F55B391B8E36050072F09B /* gmp.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F55B371B8E36050072F09B /* gmp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4F55B3E1B8E36220072F09B /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B3C1B8E36220072F09B /* libgmp.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		F4F55B401B8E36A80072F09B /* IntMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B3F1B8E36A80072F09B /* IntMP.swift */; };
@@ -33,18 +33,17 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		F4EF1DF61B94C6F600748DCC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			dstPath = "";
-			dstSubfolderSpec = 11;
+			dstSubfolderSpec = 10;
 			files = (
-				F4EF1DF81B94C73600748DCC /* GMPSwift.framework in CopyFiles */,
+				F48EDC361B94DB2C004BB3BC /* libgmp.10.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F41BF5C21B94AD9800AD81E5 /* Integer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Integer.playground; sourceTree = "<group>"; };
 		F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
 		F498B32E1B905E190075FFF9 /* IntUInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUInt.swift; sourceTree = "<group>"; };
 		F498B3301B9062920075FFF9 /* IntUIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUIntTests.swift; sourceTree = "<group>"; };
@@ -89,7 +88,6 @@
 				F4F55B1A1B8E35780072F09B /* GMPSwift */,
 				F4F55B271B8E35780072F09B /* GMPSwiftTests */,
 				F4F55B191B8E35780072F09B /* Products */,
-				F41BF5C21B94AD9800AD81E5 /* Integer.playground */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,7 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F55B381B8E36050072F09B /* gmp-man-6.0.0a.pdf in Resources */,
+				F48EDC351B94D7AF004BB3BC /* gmp-man-6.0.0a.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
