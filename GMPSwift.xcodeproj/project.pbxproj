@@ -45,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
-		F48EDC371B94E07D004BB3BC /* GMP.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = GMP.playground; sourceTree = "<group>"; };
 		F498B32E1B905E190075FFF9 /* IntUInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUInt.swift; sourceTree = "<group>"; };
 		F498B3301B9062920075FFF9 /* IntUIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUIntTests.swift; sourceTree = "<group>"; };
 		F4F55B181B8E35780072F09B /* GMPSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMPSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +84,6 @@
 		F4F55B0E1B8E35780072F09B = {
 			isa = PBXGroup;
 			children = (
-				F48EDC371B94E07D004BB3BC /* GMP.playground */,
 				F4F55B3A1B8E36090072F09B /* GMP */,
 				F4F55B1A1B8E35780072F09B /* GMPSwift */,
 				F4F55B271B8E35780072F09B /* GMPSwiftTests */,
