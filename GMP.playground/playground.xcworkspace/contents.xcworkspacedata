@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "group:../../Documents/Workspace/GMPSwift/GMP.playground">
    </FileRef>
 </Workspace>

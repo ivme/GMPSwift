@@ -5,20 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>CE2CEE7A-C198-47B2-B925-AD7B415BE719</string>
+	<string>7B6E1256-EDF5-4D36-8BBA-C126B53EEFFC</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Integer</string>
+	<string>playground</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>6E206FD05D639448669E7929003F494C6C8973D0</key>
 		<string>https://github.com/jmgc/GMPSwift.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Integer.playground</string>
+	<string>GMP.playground/playground.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6E206FD05D639448669E7929003F494C6C8973D0</key>
-		<string>..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/jmgc/GMPSwift.git</string>
