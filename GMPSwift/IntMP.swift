@@ -35,13 +35,27 @@ infix operator ** {
     precedence 160
 }
 
-infix operator .. {
-    associativity none
-    precedence 135
-}
-
 public final class IntMP: SignedIntegerType{
-    var gmpz_p = mpz_ptr.alloc(1)
+    private var gmpz_p = mpz_ptr.alloc(1)
+    private var _bitLength: Int? = nil
+    
+    public var bitLength: Int {
+        var value = IntMP(self)
+        
+        if self.gmpz_p[0]._mp_size < 0 {
+            __gmpz_neg(value.gmpz_p, value.gmpz_p)
+        }
+        
+        var check = IntMP(1)
+        var n = 0
+        
+        while(check <= value){
+            __gmpz_mul_2exp(check.gmpz_p, check.gmpz_p, 1)
+            n++
+        }
+        
+        return n + 1
+    }
     
     /// A type that can represent the number of steps between pairs of
     /// values.
@@ -70,9 +84,16 @@ public final class IntMP: SignedIntegerType{
         __gmpz_init_set_si(gmpz_p, int)
     }
 
-    public init(value: Int, bitcnt: Int){
-        __gmpz_init2(gmpz_p, mp_bitcnt_t(bitcnt))
+    public init(value: Int, bitCnt: Int){
+        __gmpz_init2(gmpz_p, mp_bitcnt_t(bitCnt))
         __gmpz_set_si(gmpz_p, value)
+        _bitLength = bitCnt
+    }
+    
+    public init(value: UInt, bitCnt: Int){
+        __gmpz_init2(gmpz_p, mp_bitcnt_t(bitCnt))
+        __gmpz_set_ui(gmpz_p, value)
+        _bitLength = bitCnt
     }
     
     public init(value: IntMax, bitcnt: Int){
@@ -80,13 +101,15 @@ public final class IntMP: SignedIntegerType{
         __gmpz_set_si(gmpz_p, Int(value))
     }
 
-    public init(rawValue: IntMP){
+    public init(_ rawValue: IntMP){
         __gmpz_init_set(gmpz_p, rawValue.gmpz_p)
+        _bitLength = rawValue._bitLength
     }
 
     /// Create an instance initialized to `value`.
     public required init(integerLiteral value: IntMP){
         __gmpz_init_set(gmpz_p, value.gmpz_p)
+        _bitLength = value._bitLength
     }
 
     public var hashValue: Int {
@@ -155,6 +178,14 @@ public final class IntMP: SignedIntegerType{
     public func toIntMax() -> IntMax {
         var value: IntMax = __gmpz_get_si(gmpz_p).toIntMax()
         return value
+    }
+
+    public func toInt() -> Int {
+        return Int(__gmpz_get_si(gmpz_p))
+    }
+
+    public func toUInt() -> UInt {
+        return UInt(__gmpz_get_ui(gmpz_p))
     }
 
     public static func addWithOverflow(lhs: IntMP, _ rhs: IntMP) -> (IntMP, overflow: Bool) {
@@ -439,8 +470,9 @@ public func ^(lhs: UInt, rhs: IntMP) -> IntMP {
 
 public prefix func ~(x: IntMP) -> IntMP {
     var result = IntMP()
-    
+
     __gmpz_com(result.gmpz_p, x.gmpz_p)
+    result._bitLength = x._bitLength
     
     return result
 }
@@ -671,6 +703,48 @@ public func %(lhs: UInt, rhs: IntMP) -> IntMP {
     return q
 }
 
+public func &=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_and(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func &=(inout lhs: IntMP, rhs: Int) {
+    let rhsMP = IntMP(rhs)
+    __gmpz_and(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func &=(inout lhs: IntMP, rhs: UInt) {
+    let rhsMP = IntMP(rhs)
+    __gmpz_and(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func |=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_ior(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func |=(inout lhs: IntMP, rhs: Int) {
+    let rhsMP = IntMP(rhs)
+    __gmpz_ior(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func |=(inout lhs: IntMP, rhs: UInt) {
+    let rhsMP = IntMP(rhs)
+    __gmpz_ior(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func ^=(inout lhs: IntMP, rhs: IntMP) {
+    __gmpz_xor(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
+}
+
+public func ^=(inout lhs: IntMP, rhs: Int) {
+    let rhsMP = IntMP(rhs)
+    __gmpz_xor(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
+public func ^=(inout lhs: IntMP, rhs: UInt) {
+    let rhsMP = IntMP(rhs)
+    __gmpz_xor(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
+}
+
 public func +=(inout lhs: IntMP, rhs: IntMP) {
     __gmpz_add(lhs.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
 }
@@ -817,6 +891,170 @@ public func >>=(inout lhs: IntMP, rhs: Int) {
 
 public func >>=(inout lhs: IntMP, rhs: UInt) {
     __gmpz_fdiv_q_2exp(lhs.gmpz_p, lhs.gmpz_p, rhs)
+}
+
+extension IntMP: MutableSliceable {
+    public var startIndex: Int {
+        return 0
+    }
+
+    public var endIndex: Int {
+        if _bitLength == nil {
+            return Int.max
+        } else {
+            return _bitLength!
+        }
+    }
+
+    func wrap(index: Int) {
+        var result = __gmpz_tstbit(gmpz_p, UInt(index)) > 0 ? IntMP(-1) : IntMP(0)
+        let initResult = Int(result)
+        var mask = IntMP(1)
+        var cmpMask = IntMP()
+        var otherBits = IntMP()
+        
+        __gmpz_mul_2exp(mask.gmpz_p, mask.gmpz_p, UInt(index - 1))
+        __gmpz_sub_ui(mask.gmpz_p, mask.gmpz_p, 1)
+        
+        __gmpz_com(cmpMask.gmpz_p, mask.gmpz_p)
+        __gmpz_and(result.gmpz_p, result.gmpz_p, cmpMask.gmpz_p)
+        __gmpz_and(otherBits.gmpz_p, self.gmpz_p, mask.gmpz_p)
+        __gmpz_ior(self.gmpz_p, result.gmpz_p, otherBits.gmpz_p)
+    }
+
+    public subscript (position: Int) -> Bool? {
+        get {
+            if position < startIndex {
+                return nil
+            }
+            
+            if _bitLength == nil || position < _bitLength! {
+                return Bool(Int(__gmpz_tstbit(gmpz_p, UInt(position))))
+            } else {
+                return nil
+            }
+        }
+        
+        set(newValue) {
+            var value = newValue!
+            let endBit = endIndex
+            if position < endIndex {
+                if value {
+                    __gmpz_setbit(gmpz_p, UInt(position))
+                } else {
+                    __gmpz_clrbit(gmpz_p, UInt(position))
+                }
+            }
+            
+            if position == (endBit - 1) {
+                wrap(position)
+            }
+        }
+    }
+    
+    public subscript (slice: Range<Int>) -> IntMP {
+        get {
+            var i = slice.endIndex
+            var j = slice.startIndex
+            
+            if i <= j {
+                return 0
+            }
+            
+            if i > endIndex {
+                i = endIndex
+            }
+            
+            if j < startIndex {
+                j = startIndex
+            }
+            
+            var val = IntMP(self)
+            let delta = i - j
+            
+            var disp = j - self.startIndex
+            
+            if disp > 0 {
+                __gmpz_fdiv_q_2exp(val.gmpz_p, self.gmpz_p, UInt(disp))
+            } else {
+                __gmpz_mul_2exp(val.gmpz_p, self.gmpz_p, UInt(-disp))
+            }
+            
+            if delta < self.endIndex {
+                var mask = IntMP(1)
+                
+                __gmpz_mul_2exp(mask.gmpz_p, mask.gmpz_p, UInt(delta))
+                __gmpz_sub_ui(mask.gmpz_p, mask.gmpz_p, 1)
+                __gmpz_and(val.gmpz_p, val.gmpz_p, mask.gmpz_p)
+            }
+
+            val._bitLength = delta
+
+            return val
+        }
+        
+        set(newValue) {
+            var i = slice.endIndex
+            var j = slice.startIndex
+            
+            if i > j {
+                if i > endIndex {
+                    i = endIndex
+                }
+                
+                if j < startIndex {
+                    j = startIndex
+                }
+                
+                var delta = i - j
+                
+                var mask = IntMP(1)
+                
+                __gmpz_mul_2exp(mask.gmpz_p, mask.gmpz_p, UInt(delta))
+                __gmpz_sub_ui(mask.gmpz_p, mask.gmpz_p, 1)
+                
+                var filter: IntMP = 0
+
+                __gmpz_mul_2exp(filter.gmpz_p, mask.gmpz_p, UInt(j - self.startIndex))
+                __gmpz_com(filter.gmpz_p, filter.gmpz_p)
+                __gmpz_and(self.gmpz_p, self.gmpz_p, filter.gmpz_p)
+
+                let filterInt = Int(filter)
+                let filteredInt = Int(self)
+                
+                var value: IntMP = 0
+                
+                __gmpz_and(value.gmpz_p, newValue.gmpz_p, mask.gmpz_p)
+                __gmpz_mul_2exp(value.gmpz_p, value.gmpz_p, UInt(j - self.startIndex))
+                __gmpz_ior(self.gmpz_p, self.gmpz_p, value.gmpz_p)
+                
+                let newValueInt = Int(newValue)
+                let valueInt = Int(value)
+                let maskInt = Int(mask)
+                let finalInt = Int(self)
+
+                if i == endIndex {
+                    wrap(i - 1)
+                }
+            }
+        }
+    }
+    
+    public func generate() -> GeneratorOf<Bool?> {
+        var index = 0
+        var value = IntMP(self)
+        let valueInt = Int(value)
+        let _endIndex = _bitLength ?? bitLength
+        return GeneratorOf {
+            if index < _endIndex {
+                var result = Bool(Int(__gmpz_tstbit(value.gmpz_p, UInt(index))))
+                index++
+                return result
+            } else {
+                return nil
+            }
+        }
+    }
 }
 
 public func **(base: IntMP, exp: IntMP) -> (IntMP) {

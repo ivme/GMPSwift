@@ -33,7 +33,7 @@ import Swift
 
 extension Int {
     public init(_ value:IntMP) {
-        self = Int(__gmpz_get_si(value.gmpz_p))
+        self = value.toInt()
     }
 }
 
@@ -147,18 +147,28 @@ extension Int: MutableSliceable {
 }
 
 public func **(base: Int, exp: Int) -> (Int) {
-    var result = IntMP()
-    
+    var result: Int
+
     if exp > 0 {
+        var gmpz_p = mpz_ptr.alloc(1)
+        
+        __gmpz_init(gmpz_p)
+        
         if base >= 0 {
-            __gmpz_ui_pow_ui(result.gmpz_p, UInt(base), UInt(exp))
+            __gmpz_ui_pow_ui(gmpz_p, UInt(base), UInt(exp))
         } else {
-            __gmpz_ui_pow_ui(result.gmpz_p, UInt(-base), UInt(exp))
+            __gmpz_ui_pow_ui(gmpz_p, UInt(-base), UInt(exp))
             
             if exp & 1 == 1 {
-                __gmpz_neg(result.gmpz_p, result.gmpz_p)
+                __gmpz_neg(gmpz_p, gmpz_p)
             }
         }
+        
+        result = Int(__gmpz_get_si(gmpz_p))
+        
+        __gmpz_clear(gmpz_p)
+        
+        return result
     } else if exp < 0 {
         if base == 1 {
             return 1
@@ -168,17 +178,11 @@ public func **(base: Int, exp: Int) -> (Int) {
     } else {
         return 1
     }
-    
-    return __gmpz_get_si(result.gmpz_p)
-}
-
-public func ..(startIndex: Int, endIndex: Int) -> Range<Int> {
-    return Range<Int>(start: startIndex, end: endIndex)
 }
 
 extension UInt {
     public init(_ value:IntMP) {
-        self = UInt(__gmpz_get_ui(value.gmpz_p))
+        self = value.toUInt()
     }
 }
 
@@ -266,7 +270,7 @@ extension UInt: CollectionType {
                     j = self.startIndex
                 }
                 
-                var delta = i -  j
+                var delta = i - j
                 
                 var mask = UInt(delta < self.endIndex ? (1 << delta) - 1 : ~0)
                 
@@ -292,10 +296,15 @@ extension UInt: CollectionType {
 }
 
 public func **(base: UInt, exp: UInt) -> (UInt) {
-    var result = IntMP()
+    var gmpz_p = mpz_ptr.alloc(1)
+
+    __gmpz_init(gmpz_p)
+    __gmpz_ui_pow_ui(gmpz_p, base, exp)
     
-    __gmpz_ui_pow_ui(result.gmpz_p, base, exp)
-    
-    return __gmpz_get_ui(result.gmpz_p)
+    var result = UInt(__gmpz_get_ui(gmpz_p))
+
+    __gmpz_clear(gmpz_p)
+
+    return result
 }
 

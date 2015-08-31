@@ -646,6 +646,144 @@ class IntMPTests: XCTestCase {
         }
     }
 
+    func testCollectionGet() {
+        // This is an example of a functional test case.
+        let a = IntMP(random())
+        var i = a.startIndex
+        
+        for val in a {
+            var check = a[i++]
+            XCTAssert(val == check, "Pass")
+        }
+        
+        XCTAssert(i == a.bitLength, "Pass")
+    }
+    
+    func testCollectionSet() {
+        // This is an example of a functional test case.
+        var a = IntMP(random())
+        var i = a.startIndex
+        
+        for val in a {
+            a[i] = !(val!)
+            var check = a[i++]
+            XCTAssert(val != check, "Pass")
+        }
+    }
+    
+    func testEndIndexSet() {
+        // This is an example of a functional test case.
+        var aInt = random()
+        var a = IntMP(value: aInt, bitCnt: aInt.endIndex)
+        let b = IntMP(a)
+        let bInt = Int(b)
+        XCTAssert(a == b, "Pass")
+        var i = a.endIndex - 1
+        
+        var val = a[i]!
+        a[i] = !val
+        var check = a[i]!
+        XCTAssert(val != check, "Pass")
+        XCTAssert(check == (a < 0), "Pass")
+        let mask = IntMP((1 << (i - 1)) - 1)
+        let aMask = a & mask
+        let bMask = b & mask
+        XCTAssert(aMask == bMask, "Pass")
+    }
+    
+    func testSliceGet() {
+        // This is an example of a functional test case.
+        var a: IntMP
+        var startIndex: Int
+        var endIndex: Int
+
+        do {
+            a = IntMP(random())
+            startIndex = a.startIndex + 1
+            endIndex = a.bitLength - 1
+        } while(endIndex <= startIndex)
+        
+        let range = startIndex ..< endIndex
+        let b = a[range]
+        
+        var i = 0
+        
+        for j in range {
+            var checkA = a[j]!
+            var checkB = b[i++]
+            
+            if checkB == nil {
+                checkB = b[i-1]
+            }
+            XCTAssert(checkA == checkB, "Pass")
+        }
+        
+        XCTAssert(i == endIndex - startIndex , "Pass")
+    }
+    
+    func testSliceSet() {
+        // This is an example of a functional test case.
+        var a: IntMP
+        var startIndex: Int
+        var endIndex: Int
+        
+        do {
+            a = IntMP(random())
+            startIndex = a.startIndex + 1
+            endIndex = a.bitLength - 1
+        } while(endIndex <= startIndex)
+        
+        let aInt = Int(a)
+        let range = startIndex ..< endIndex
+        let b = ~a[range]
+        let bInt = Int(b)
+        a[range] = b
+        let newAInt = Int(a)
+        var i = startIndex
+        var j = 0
+        
+        for checkB in b {
+            var checkA = a[i++]!
+            XCTAssert(checkA == checkB, "Pass")
+            j++
+        }
+        let endIndexFinal = a.bitLength - 1
+        XCTAssert(i == endIndex, "Pass")
+    }
+    
+    func testEndSliceSet() {
+        // This is an example of a functional test case.
+        var aInt = random()
+        var a = IntMP(value: aInt, bitCnt: aInt.endIndex)
+        let c = IntMP(a)
+        var startIndex = (a.endIndex - a.startIndex) >> 1
+        var endIndex = a.endIndex
+        
+        let range = startIndex ..< endIndex
+        let b = ~a[range]
+        let bInt = Int(b)
+        a[range] = b
+        let newAInt = Int(a)
+        var i = startIndex
+        var j = 0
+        
+        for checkB in b {
+            var checkA = a[i++]!
+            XCTAssert(checkA == checkB, "Pass")
+            j++
+        }
+        
+        XCTAssert(a[a.endIndex - 1] == (a < 0), "Pass")
+        
+        for i in 0 ..< startIndex {
+            var checkA = a[i]!
+            var checkC = c[i]!
+            XCTAssert(checkA == checkC, "Pass")
+        }
+        
+        XCTAssert(j == endIndex - startIndex , "Pass")
+    }
+    
     func testPower() {
         // This is an example of a functional test case.
         var a = 3

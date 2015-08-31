@@ -202,6 +202,8 @@ class IntUIntTests: XCTestCase {
             XCTAssert(checkA == checkB, "Pass")
         }
         
+        XCTAssert(a[a.endIndex - 1] == (a < 0), "Pass")
+
         XCTAssert(i == endIndex - startIndex , "Pass")
     }
 
