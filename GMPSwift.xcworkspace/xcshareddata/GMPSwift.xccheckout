@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6AC9AFC5-4246-49DA-A92D-78C78BBC9E03</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GMPSwift</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6E206FD05D639448669E7929003F494C6C8973D0</key>
+		<string>https://github.com/jmgc/GMPSwift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GMPSwift.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6E206FD05D639448669E7929003F494C6C8973D0</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/jmgc/GMPSwift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6E206FD05D639448669E7929003F494C6C8973D0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6E206FD05D639448669E7929003F494C6C8973D0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GMPSwift</string>
+		</dict>
+	</array>
+</dict>
+</plist>
