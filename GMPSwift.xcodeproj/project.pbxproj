@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F4555CF91B8EEF3A00B1B8CF /* GMPSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F498B32F1B905E190075FFF9 /* IntUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B32E1B905E190075FFF9 /* IntUInt.swift */; };
+		F498B3311B9062920075FFF9 /* IntUIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B3301B9062920075FFF9 /* IntUIntTests.swift */; };
 		F4F55B241B8E35780072F09B /* GMPSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; };
 		F4F55B2B1B8E35780072F09B /* IntMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B2A1B8E35780072F09B /* IntMPTests.swift */; };
 		F4F55B381B8E36050072F09B /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
@@ -31,6 +33,8 @@
 /* Begin PBXFileReference section */
 		F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
 		F4555CFA1B8EFC7900B1B8CF /* IntegerProtocolsCheck.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = IntegerProtocolsCheck.playground; sourceTree = "<group>"; };
+		F498B32E1B905E190075FFF9 /* IntUInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUInt.swift; sourceTree = "<group>"; };
+		F498B3301B9062920075FFF9 /* IntUIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUIntTests.swift; sourceTree = "<group>"; };
 		F4F55B181B8E35780072F09B /* GMPSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMPSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F55B1C1B8E35780072F09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4F55B231B8E35780072F09B /* GMPSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMPSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +96,7 @@
 				F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */,
 				F4F55B431B8E39720072F09B /* GMPSwift-Swift.h */,
 				F4F55B3F1B8E36A80072F09B /* IntMP.swift */,
+				F498B32E1B905E190075FFF9 /* IntUInt.swift */,
 				F4F55B1B1B8E35780072F09B /* Supporting Files */,
 			);
 			path = GMPSwift;
@@ -110,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				F4F55B2A1B8E35780072F09B /* IntMPTests.swift */,
+				F498B3301B9062920075FFF9 /* IntUIntTests.swift */,
 				F4F55B281B8E35780072F09B /* Supporting Files */,
 			);
 			path = GMPSwiftTests;
@@ -245,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F55B401B8E36A80072F09B /* IntMP.swift in Sources */,
+				F498B32F1B905E190075FFF9 /* IntUInt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F55B2B1B8E35780072F09B /* IntMPTests.swift in Sources */,
+				F498B3311B9062920075FFF9 /* IntUIntTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

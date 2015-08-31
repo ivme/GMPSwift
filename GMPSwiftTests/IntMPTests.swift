@@ -494,26 +494,6 @@ class IntMPTests: XCTestCase {
         XCTAssert(minMP.toIntMax() == min, "Pass")
     }
 
-    func testIntInt() {
-        // This is an example of a functional test case.
-        let a = 3
-        let aMP = IntMP(a)
-        let aInt = Int(aMP)
-        
-        XCTAssert(aMP == aInt, "Pass")
-        XCTAssert(aInt == a, "Pass")
-    }
-    
-    func testUIntUInt() {
-        // This is an example of a functional test case.
-        let a: UInt = 3
-        let aMP = IntMP(a)
-        let aInt = UInt(aMP)
-        
-        XCTAssert(aMP == aInt, "Pass")
-        XCTAssert(aInt == a, "Pass")
-    }
-    
     func testDistanceTo() {
         // This is an example of a functional test case.
         let lhsInt = -27
@@ -666,6 +646,144 @@ class IntMPTests: XCTestCase {
         }
     }
 
+    func testCollectionGet() {
+        // This is an example of a functional test case.
+        let a = IntMP(random())
+        var i = a.startIndex
+        
+        for val in a {
+            var check = a[i++]
+            XCTAssert(val == check, "Pass")
+        }
+        
+        XCTAssert(i == a.bitLength, "Pass")
+    }
+    
+    func testCollectionSet() {
+        // This is an example of a functional test case.
+        var a = IntMP(random())
+        var i = a.startIndex
+        
+        for val in a {
+            a[i] = !(val!)
+            var check = a[i++]
+            XCTAssert(val != check, "Pass")
+        }
+    }
+    
+    func testEndIndexSet() {
+        // This is an example of a functional test case.
+        var aInt = random()
+        var a = IntMP(value: aInt, bitCnt: aInt.endIndex)
+        let b = IntMP(a)
+        let bInt = Int(b)
+        XCTAssert(a == b, "Pass")
+        var i = a.endIndex - 1
+        
+        var val = a[i]!
+        a[i] = !val
+        var check = a[i]!
+        XCTAssert(val != check, "Pass")
+        XCTAssert(check == (a < 0), "Pass")
+        let mask = IntMP((1 << (i - 1)) - 1)
+        let aMask = a & mask
+        let bMask = b & mask
+        XCTAssert(aMask == bMask, "Pass")
+    }
+    
+    func testSliceGet() {
+        // This is an example of a functional test case.
+        var a: IntMP
+        var startIndex: Int
+        var endIndex: Int
+
+        do {
+            a = IntMP(random())
+            startIndex = a.startIndex + 1
+            endIndex = a.bitLength - 1
+        } while(endIndex <= startIndex)
+        
+        let range = startIndex ..< endIndex
+        let b = a[range]
+        
+        var i = 0
+        
+        for j in range {
+            var checkA = a[j]!
+            var checkB = b[i++]
+            
+            if checkB == nil {
+                checkB = b[i-1]
+            }
+            XCTAssert(checkA == checkB, "Pass")
+        }
+        
+        XCTAssert(i == endIndex - startIndex , "Pass")
+    }
+    
+    func testSliceSet() {
+        // This is an example of a functional test case.
+        var a: IntMP
+        var startIndex: Int
+        var endIndex: Int
+        
+        do {
+            a = IntMP(random())
+            startIndex = a.startIndex + 1
+            endIndex = a.bitLength - 1
+        } while(endIndex <= startIndex)
+        
+        let aInt = Int(a)
+        let range = startIndex ..< endIndex
+        let b = ~a[range]
+        let bInt = Int(b)
+        a[range] = b
+        let newAInt = Int(a)
+        var i = startIndex
+        var j = 0
+        
+        for checkB in b {
+            var checkA = a[i++]!
+            XCTAssert(checkA == checkB, "Pass")
+            j++
+        }
+        let endIndexFinal = a.bitLength - 1
+        XCTAssert(i == endIndex, "Pass")
+    }
+    
+    func testEndSliceSet() {
+        // This is an example of a functional test case.
+        var aInt = random()
+        var a = IntMP(value: aInt, bitCnt: aInt.endIndex)
+        let c = IntMP(a)
+        var startIndex = (a.endIndex - a.startIndex) >> 1
+        var endIndex = a.endIndex
+        
+        let range = startIndex ..< endIndex
+        let b = ~a[range]
+        let bInt = Int(b)
+        a[range] = b
+        let newAInt = Int(a)
+        var i = startIndex
+        var j = 0
+        
+        for checkB in b {
+            var checkA = a[i++]!
+            XCTAssert(checkA == checkB, "Pass")
+            j++
+        }
+        
+        XCTAssert(a[a.endIndex - 1] == (a < 0), "Pass")
+        
+        for i in 0 ..< startIndex {
+            var checkA = a[i]!
+            var checkC = c[i]!
+            XCTAssert(checkA == checkC, "Pass")
+        }
+        
+        XCTAssert(j == endIndex - startIndex , "Pass")
+    }
+    
     func testPower() {
         // This is an example of a functional test case.
         var a = 3
@@ -677,48 +795,35 @@ class IntMPTests: XCTestCase {
             acc *= a
         }
         
-        XCTAssert(UInt(a) ** c == UInt(acc), "Pass")
         XCTAssert(IntMP(a) ** IntMP(c) == UInt(acc), "Pass")
 
         acc = 1
         for i in 0 ..< a {
             acc *= b
         }
-        var powN = Int(b) ** Int(a)
         var powMP = IntMP(b) ** IntMP(a)
         
-        XCTAssert(powN == Int(acc), "Pass")
         XCTAssert(powMP == Int(acc), "Pass")
         
         a = 2
         b = -1
         
-        powN = Int(a) ** Int(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 0, "Pass")
         XCTAssert(powMP == 0, "Pass")
 
         a = 2
         b = 0
         
-        powN = Int(a) ** Int(b)
-        var powP = UInt(a) ** UInt(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 1, "Pass")
-        XCTAssert(powP == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
 
         a = 0
         b = 2
         
-        powN = Int(a) ** Int(b)
-        powP = UInt(a) ** UInt(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 0, "Pass")
-        XCTAssert(powP == 0, "Pass")
         XCTAssert(powMP == 0, "Pass")
 
         a = 2
@@ -728,32 +833,22 @@ class IntMPTests: XCTestCase {
         for i in 0 ..< a {
             acc *= b
         }
-        powN = Int(b) ** Int(a)
-        powP = UInt(b) ** UInt(a)
         powMP = IntMP(b) ** IntMP(a)
         
-        XCTAssert(powN == Int(acc), "Pass")
-        XCTAssert(powP == UInt(acc), "Pass")
         XCTAssert(powMP == Int(acc), "Pass")
 
         a = -2
         b = 0
         
-        powN = Int(a) ** Int(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
 
         a = 0
         b = 0
         
-        powN = Int(a) ** Int(b)
-        powP = UInt(a) ** UInt(b)
         powMP = IntMP(a) ** IntMP(b)
         
-        XCTAssert(powN == 1, "Pass")
-        XCTAssert(powP == 1, "Pass")
         XCTAssert(powMP == 1, "Pass")
     }
 }
