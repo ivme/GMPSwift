@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F420D1F11B9522A50090D7D6 /* gpl-v2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1ED1B9522A50090D7D6 /* gpl-v2.0.txt */; };
+		F420D1F21B9522A50090D7D6 /* gpl-v3.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1EE1B9522A50090D7D6 /* gpl-v3.0.txt */; };
+		F420D1F31B9522A50090D7D6 /* lglp-v3.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1EF1B9522A50090D7D6 /* lglp-v3.0.txt */; };
+		F420D1F41B9522A50090D7D6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1F01B9522A50090D7D6 /* LICENSE.txt */; };
 		F4555CF91B8EEF3A00B1B8CF /* GMPSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F48EDC351B94D7AF004BB3BC /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
 		F48EDC361B94DB2C004BB3BC /* libgmp.10.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; };
@@ -44,6 +48,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F420D1ED1B9522A50090D7D6 /* gpl-v2.0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gpl-v2.0.txt"; sourceTree = "<group>"; };
+		F420D1EE1B9522A50090D7D6 /* gpl-v3.0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "gpl-v3.0.txt"; sourceTree = "<group>"; };
+		F420D1EF1B9522A50090D7D6 /* lglp-v3.0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "lglp-v3.0.txt"; sourceTree = "<group>"; };
+		F420D1F01B9522A50090D7D6 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
 		F498B32E1B905E190075FFF9 /* IntUInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUInt.swift; sourceTree = "<group>"; };
 		F498B3301B9062920075FFF9 /* IntUIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUIntTests.swift; sourceTree = "<group>"; };
@@ -81,9 +89,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F420D1F51B9522BB0090D7D6 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				F420D1ED1B9522A50090D7D6 /* gpl-v2.0.txt */,
+				F420D1EE1B9522A50090D7D6 /* gpl-v3.0.txt */,
+				F420D1EF1B9522A50090D7D6 /* lglp-v3.0.txt */,
+				F420D1F01B9522A50090D7D6 /* LICENSE.txt */,
+			);
+			name = License;
+			sourceTree = "<group>";
+		};
 		F4F55B0E1B8E35780072F09B = {
 			isa = PBXGroup;
 			children = (
+				F420D1F51B9522BB0090D7D6 /* License */,
 				F4F55B3A1B8E36090072F09B /* GMP */,
 				F4F55B1A1B8E35780072F09B /* GMPSwift */,
 				F4F55B271B8E35780072F09B /* GMPSwiftTests */,
@@ -243,6 +263,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F420D1F11B9522A50090D7D6 /* gpl-v2.0.txt in Resources */,
+				F420D1F21B9522A50090D7D6 /* gpl-v3.0.txt in Resources */,
+				F420D1F31B9522A50090D7D6 /* lglp-v3.0.txt in Resources */,
+				F420D1F41B9522A50090D7D6 /* LICENSE.txt in Resources */,
 				F48EDC351B94D7AF004BB3BC /* gmp-man-6.0.0a.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

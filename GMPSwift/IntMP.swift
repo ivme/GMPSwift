@@ -2,9 +2,9 @@
 
 Copyright 2015 Jose Maria Gomez Cama
 
-This file is part of the GMPSwitch Library.
+This file is part of the GMPSwift Library.
 
-The GMPSwitch Library is free software; you can redistribute it and/or modify
+The GMPSwift Library is free software; you can redistribute it and/or modify
 it under the terms of either:
 
 * the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,7 @@ later version.
 
 or both in parallel, as here.
 
-The GMPSwitch Library is distributed in the hope that it will be useful, but
+The GMPSwift Library is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 for more details.
