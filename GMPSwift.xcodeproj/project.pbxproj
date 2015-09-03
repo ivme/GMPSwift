@@ -16,6 +16,7 @@
 		F48EDC361B94DB2C004BB3BC /* libgmp.10.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; };
 		F498B32F1B905E190075FFF9 /* IntUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B32E1B905E190075FFF9 /* IntUInt.swift */; };
 		F498B3311B9062920075FFF9 /* IntUIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B3301B9062920075FFF9 /* IntUIntTests.swift */; };
+		F4CA524D1B98C0410098997E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CA524C1B98C0410098997E /* main.swift */; };
 		F4F55B241B8E35780072F09B /* GMPSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; };
 		F4F55B2B1B8E35780072F09B /* IntMPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F55B2A1B8E35780072F09B /* IntMPTests.swift */; };
 		F4F55B391B8E36050072F09B /* gmp.h in Headers */ = {isa = PBXBuildFile; fileRef = F4F55B371B8E36050072F09B /* gmp.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +36,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F4CA52481B98C0410098997E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		F4EF1DF61B94C6F600748DCC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -55,6 +65,8 @@
 		F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPSwift.h; sourceTree = "<group>"; };
 		F498B32E1B905E190075FFF9 /* IntUInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUInt.swift; sourceTree = "<group>"; };
 		F498B3301B9062920075FFF9 /* IntUIntTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntUIntTests.swift; sourceTree = "<group>"; };
+		F4CA524A1B98C0410098997E /* TestGMPSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestGMPSwift; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4CA524C1B98C0410098997E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F4F55B181B8E35780072F09B /* GMPSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GMPSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F55B1C1B8E35780072F09B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4F55B231B8E35780072F09B /* GMPSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GMPSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +82,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F4CA52471B98C0410098997E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4F55B141B8E35780072F09B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,6 +119,14 @@
 			name = License;
 			sourceTree = "<group>";
 		};
+		F4CA524B1B98C0410098997E /* TestGMPSwift */ = {
+			isa = PBXGroup;
+			children = (
+				F4CA524C1B98C0410098997E /* main.swift */,
+			);
+			path = TestGMPSwift;
+			sourceTree = "<group>";
+		};
 		F4F55B0E1B8E35780072F09B = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +134,7 @@
 				F4F55B3A1B8E36090072F09B /* GMP */,
 				F4F55B1A1B8E35780072F09B /* GMPSwift */,
 				F4F55B271B8E35780072F09B /* GMPSwiftTests */,
+				F4CA524B1B98C0410098997E /* TestGMPSwift */,
 				F4F55B191B8E35780072F09B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +144,7 @@
 			children = (
 				F4F55B181B8E35780072F09B /* GMPSwift.framework */,
 				F4F55B231B8E35780072F09B /* GMPSwiftTests.xctest */,
+				F4CA524A1B98C0410098997E /* TestGMPSwift */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +215,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		F4CA52491B98C0410098997E /* TestGMPSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4CA524E1B98C0410098997E /* Build configuration list for PBXNativeTarget "TestGMPSwift" */;
+			buildPhases = (
+				F4CA52461B98C0410098997E /* Sources */,
+				F4CA52471B98C0410098997E /* Frameworks */,
+				F4CA52481B98C0410098997E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestGMPSwift;
+			productName = TestGMPSwift;
+			productReference = F4CA524A1B98C0410098997E /* TestGMPSwift */;
+			productType = "com.apple.product-type.tool";
+		};
 		F4F55B171B8E35780072F09B /* GMPSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4F55B2E1B8E35780072F09B /* Build configuration list for PBXNativeTarget "GMPSwift" */;
@@ -232,6 +278,9 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "José María Gómez Cama";
 				TargetAttributes = {
+					F4CA52491B98C0410098997E = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					F4F55B171B8E35780072F09B = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -254,6 +303,7 @@
 			targets = (
 				F4F55B171B8E35780072F09B /* GMPSwift */,
 				F4F55B221B8E35780072F09B /* GMPSwiftTests */,
+				F4CA52491B98C0410098997E /* TestGMPSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +331,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F4CA52461B98C0410098997E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4CA524D1B98C0410098997E /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4F55B131B8E35780072F09B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,6 +368,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		F4CA524F1B98C0410098997E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F4CA52501B98C0410098997E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F4F55B2C1B8E35780072F09B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -481,6 +557,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F4CA524E1B98C0410098997E /* Build configuration list for PBXNativeTarget "TestGMPSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4CA524F1B98C0410098997E /* Debug */,
+				F4CA52501B98C0410098997E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F4F55B121B8E35780072F09B /* Build configuration list for PBXProject "GMPSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
