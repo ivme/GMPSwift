@@ -138,8 +138,8 @@ public final class IntMP: SignedIntegerType{
         return QuickLookObject.Text(description)
     }
 
-    public func description(base: Int) -> String {
-        return String.fromCString(__gmpz_get_str(nil, Int32(base), gmpz_p))!
+    public func toString(radix: Int) -> String {
+        return String.fromCString(__gmpz_get_str(nil, Int32(radix), gmpz_p))!
     }
     
     public func distanceTo(other: IntMP) -> IntMP {

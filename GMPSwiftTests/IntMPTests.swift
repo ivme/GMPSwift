@@ -480,7 +480,7 @@ class IntMPTests: XCTestCase {
         // This is an example of a functional test case.
         let value = IntMP(36)
         
-        XCTAssert(value.description(16) == "24", "Pass")
+        XCTAssert(value.toString(16) == "24", "Pass")
     }
     
     func testToIntMax() {
