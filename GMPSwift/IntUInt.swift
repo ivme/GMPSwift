@@ -64,7 +64,7 @@ extension Int: MutableSliceable {
         }
         
         set(newValue) {
-            var value = newValue!
+            let value = newValue!
             if value {
                 self |= (1 << position)
             } else {
@@ -93,7 +93,7 @@ extension Int: MutableSliceable {
             var val = self
             let delta = i - j
             
-            var disp = j - self.startIndex
+            let disp = j - self.startIndex
             
             if disp > 0 {
                 val = self >> disp
@@ -121,9 +121,9 @@ extension Int: MutableSliceable {
                     j = self.startIndex
                 }
                 
-                var delta = i -  j
+                let delta = i -  j
                 
-                var mask = delta < self.endIndex ? (1 << delta) - 1 : ~0
+                let mask = delta < self.endIndex ? (1 << delta) - 1 : ~0
                 
                 self &= ~(mask << (j - self.startIndex))
                 self |= ((newValue & mask) << (j - self.startIndex))
@@ -131,12 +131,12 @@ extension Int: MutableSliceable {
         }
     }
 
-    public func generate() -> GeneratorOf<Bool?> {
+    public func generate() -> AnyGenerator<Bool?> {
         var index = 0
         var value = Int(self.value)
-        return GeneratorOf {
+        return anyGenerator {
             if index < self.endIndex {
-                var result = Bool(value & 1)
+                let result = Bool(value & 1)
                 value >>= 1
                 index++
                 return result
@@ -150,7 +150,7 @@ public func **(base: Int, exp: Int) -> (Int) {
     var result: Int
 
     if exp > 0 {
-        var gmpz_p = mpz_ptr.alloc(1)
+        let gmpz_p = mpz_ptr.alloc(1)
         
         __gmpz_init(gmpz_p)
         
@@ -213,7 +213,7 @@ extension UInt: CollectionType {
         }
         
         set(newValue) {
-            var value = newValue!
+            let value = newValue!
             if value {
                 self |= (1 << UInt(position))
             } else {
@@ -242,7 +242,7 @@ extension UInt: CollectionType {
             var val = self
             let delta = i - j
             
-            var disp = j - self.startIndex
+            let disp = j - self.startIndex
             
             if disp > 0 {
                 val = self >> UInt(disp)
@@ -270,9 +270,9 @@ extension UInt: CollectionType {
                     j = self.startIndex
                 }
                 
-                var delta = i - j
+                let delta = i - j
                 
-                var mask = UInt(delta < self.endIndex ? (1 << delta) - 1 : ~0)
+                let mask = UInt(delta < self.endIndex ? (1 << delta) - 1 : ~0)
                 
                 self &= ~(mask << UInt(j - self.startIndex))
                 self |= ((newValue & mask) << UInt(j - self.startIndex))
@@ -280,12 +280,12 @@ extension UInt: CollectionType {
         }
     }
     
-    public func generate() -> GeneratorOf<Bool?> {
+    public func generate() -> AnyGenerator<Bool?> {
         var index = 0
         var value = Int(self.value)
-        return GeneratorOf {
+        return anyGenerator {
             if index < self.endIndex {
-                var result = Bool(value & 1)
+                let result = Bool(value & 1)
                 value >>= 1
                 index++
                 return result
@@ -296,12 +296,12 @@ extension UInt: CollectionType {
 }
 
 public func **(base: UInt, exp: UInt) -> (UInt) {
-    var gmpz_p = mpz_ptr.alloc(1)
+    let gmpz_p = mpz_ptr.alloc(1)
 
     __gmpz_init(gmpz_p)
     __gmpz_ui_pow_ui(gmpz_p, base, exp)
     
-    var result = UInt(__gmpz_get_ui(gmpz_p))
+    let result = UInt(__gmpz_get_ui(gmpz_p))
 
     __gmpz_clear(gmpz_p)
 

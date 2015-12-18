@@ -13,7 +13,7 @@
 		F420D1F41B9522A50090D7D6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1F01B9522A50090D7D6 /* LICENSE.txt */; };
 		F4555CF91B8EEF3A00B1B8CF /* GMPSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F4555CF81B8EEF3A00B1B8CF /* GMPSwift.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F48EDC351B94D7AF004BB3BC /* gmp-man-6.0.0a.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4F55B361B8E36050072F09B /* gmp-man-6.0.0a.pdf */; };
-		F48EDC361B94DB2C004BB3BC /* libgmp.10.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; };
+		F48EDC361B94DB2C004BB3BC /* libgmp.10.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = F4F55B3B1B8E36220072F09B /* libgmp.10.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		F498B32F1B905E190075FFF9 /* IntUInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B32E1B905E190075FFF9 /* IntUInt.swift */; };
 		F498B3311B9062920075FFF9 /* IntUIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F498B3301B9062920075FFF9 /* IntUIntTests.swift */; };
 		F4CA524D1B98C0410098997E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CA524C1B98C0410098997E /* main.swift */; };
@@ -275,7 +275,9 @@
 		F4F55B0F1B8E35780072F09B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "José María Gómez Cama";
 				TargetAttributes = {
 					F4CA52491B98C0410098997E = {
@@ -408,6 +410,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -491,6 +494,7 @@
 					"$(PROJECT_DIR)/GMP/OSX",
 				);
 				MODULEMAP_FILE = GMPSwift/module.modulemap;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ub.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = GMPSwift.h;
@@ -516,6 +520,7 @@
 					"$(PROJECT_DIR)/GMP/OSX",
 				);
 				MODULEMAP_FILE = GMPSwift/module.modulemap;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ub.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = GMPSwift.h;
@@ -536,6 +541,7 @@
 				);
 				INFOPLIST_FILE = GMPSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ub.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -550,6 +556,7 @@
 				);
 				INFOPLIST_FILE = GMPSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.ub.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -564,6 +571,7 @@
 				F4CA52501B98C0410098997E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4F55B121B8E35780072F09B /* Build configuration list for PBXProject "GMPSwift" */ = {
 			isa = XCConfigurationList;

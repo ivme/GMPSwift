@@ -40,13 +40,13 @@ public final class IntMP: SignedIntegerType{
     private var _bitLength: Int? = nil
     
     public var bitLength: Int {
-        var value = IntMP(self)
+        let value = IntMP(self)
         
         if self.gmpz_p[0]._mp_size < 0 {
             __gmpz_neg(value.gmpz_p, value.gmpz_p)
         }
         
-        var check = IntMP(1)
+        let check = IntMP(1)
         var n = 0
         
         while(check <= value){
@@ -59,7 +59,7 @@ public final class IntMP: SignedIntegerType{
     
     /// A type that can represent the number of steps between pairs of
     /// values.
-    typealias Distance = IntMP
+    public typealias Distance = IntMP
     
     /// Create an instance initialized to zero.
     public init() {
@@ -80,7 +80,7 @@ public final class IntMP: SignedIntegerType{
     }
 
     public required init(_builtinIntegerLiteral value: _MaxBuiltinIntegerType) {
-        var int = Int(_builtinIntegerLiteral: value)
+        let int = Int(_builtinIntegerLiteral: value)
         __gmpz_init_set_si(gmpz_p, int)
     }
 
@@ -113,8 +113,8 @@ public final class IntMP: SignedIntegerType{
     }
 
     public var hashValue: Int {
-        var size = __gmpz_size(gmpz_p)
-        var limbs: UnsafePointer<UInt> = __gmpz_limbs_read(gmpz_p)
+        let size = __gmpz_size(gmpz_p)
+        let limbs: UnsafePointer<UInt> = __gmpz_limbs_read(gmpz_p)
         var result: UInt = 0
         var tmp: UInt = 0
 
@@ -134,8 +134,8 @@ public final class IntMP: SignedIntegerType{
         return "IntMP(" + description + ")"
     }
     
-    var quickLookObject: QuickLookObject? {
-        return QuickLookObject.Text(description)
+    var quickLookObject: PlaygroundQuickLook? {
+        return PlaygroundQuickLook.Text(description)
     }
 
     public func toString(radix: Int) -> String {
@@ -143,7 +143,7 @@ public final class IntMP: SignedIntegerType{
     }
     
     public func distanceTo(other: IntMP) -> IntMP {
-        var value = IntMP()
+        let value = IntMP()
 
         __gmpz_sub(value.gmpz_p, other.gmpz_p, gmpz_p)
 
@@ -151,7 +151,7 @@ public final class IntMP: SignedIntegerType{
     }
 
     public func advancedBy(n: IntMP) -> IntMP {
-        var result = IntMP()
+        let result = IntMP()
         
         __gmpz_add(result.gmpz_p, gmpz_p, n.gmpz_p)
         
@@ -164,19 +164,19 @@ public final class IntMP: SignedIntegerType{
     }
 
     public func successor() -> IntMP {
-        var result = IntMP()
+        let result = IntMP()
         __gmpz_add_ui(result.gmpz_p, gmpz_p, 1)
         return result
     }
 
     public func predecessor() -> IntMP {
-        var result = IntMP()
+        let result = IntMP()
         __gmpz_sub_ui(result.gmpz_p, gmpz_p, 1)
         return result
     }
     
     public func toIntMax() -> IntMax {
-        var value: IntMax = __gmpz_get_si(gmpz_p).toIntMax()
+        let value: IntMax = __gmpz_get_si(gmpz_p).toIntMax()
         return value
     }
 
@@ -189,7 +189,7 @@ public final class IntMP: SignedIntegerType{
     }
 
     public static func addWithOverflow(lhs: IntMP, _ rhs: IntMP) -> (IntMP, overflow: Bool) {
-        var result = IntMP()
+        let result = IntMP()
         
         __gmpz_add(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
         
@@ -197,7 +197,7 @@ public final class IntMP: SignedIntegerType{
     }
     
     public static func subtractWithOverflow(lhs: IntMP, _ rhs: IntMP) -> (IntMP, overflow: Bool) {
-        var result = IntMP()
+        let result = IntMP()
     
         __gmpz_sub(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -205,7 +205,7 @@ public final class IntMP: SignedIntegerType{
     }
 
     public static func multiplyWithOverflow(lhs: IntMP, _ rhs: IntMP) -> (IntMP, overflow: Bool) {
-        var result = IntMP()
+        let result = IntMP()
         
         __gmpz_mul(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
         
@@ -213,7 +213,7 @@ public final class IntMP: SignedIntegerType{
     }
 
     public static func divideWithOverflow(lhs: IntMP, _ rhs: IntMP) -> (IntMP, overflow: Bool) {
-        var result = IntMP()
+        let result = IntMP()
         
         __gmpz_tdiv_q(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
         
@@ -221,7 +221,7 @@ public final class IntMP: SignedIntegerType{
     }
     
     public static func remainderWithOverflow(lhs: IntMP, _ rhs: IntMP) -> (IntMP, overflow: Bool) {
-        var result = IntMP()
+        let result = IntMP()
         
         __gmpz_tdiv_r(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
         
@@ -337,7 +337,7 @@ public func >(lhs: UInt, rhs: IntMP) -> Bool {
 }
 
 public func &(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_and(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -345,8 +345,8 @@ public func &(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func &(lhs: IntMP, rhs: Int) -> IntMP {
-    var result = IntMP()
-    var rhsMP = IntMP(rhs)
+    let result = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_and(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -354,8 +354,8 @@ public func &(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func &(lhs: Int, rhs: IntMP) -> IntMP {
-    var result = IntMP()
-    var lhsMP = IntMP(lhs)
+    let result = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_and(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -363,8 +363,8 @@ public func &(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func &(lhs: IntMP, rhs: UInt) -> IntMP {
-    var result = IntMP()
-    var rhsMP = IntMP(rhs)
+    let result = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_and(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -372,8 +372,8 @@ public func &(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func &(lhs: UInt, rhs: IntMP) -> IntMP {
-    var result = IntMP()
-    var lhsMP = IntMP(lhs)
+    let result = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_and(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -381,7 +381,7 @@ public func &(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public func |(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_ior(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -389,8 +389,8 @@ public func |(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func |(lhs: IntMP, rhs: Int) -> IntMP {
-    var result = IntMP()
-    var rhsMP = IntMP(rhs)
+    let result = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_ior(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -398,8 +398,8 @@ public func |(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func |(lhs: Int, rhs: IntMP) -> IntMP {
-    var result = IntMP()
-    var lhsMP = IntMP(lhs)
+    let result = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_ior(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -407,8 +407,8 @@ public func |(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func |(lhs: IntMP, rhs: UInt) -> IntMP {
-    var result = IntMP()
-    var rhsMP = IntMP(rhs)
+    let result = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_ior(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -416,8 +416,8 @@ public func |(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func |(lhs: UInt, rhs: IntMP) -> IntMP {
-    var result = IntMP()
-    var lhsMP = IntMP(lhs)
+    let result = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_ior(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -425,7 +425,7 @@ public func |(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public func ^(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_xor(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -433,8 +433,8 @@ public func ^(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func ^(lhs: IntMP, rhs: Int) -> IntMP {
-    var result = IntMP()
-    var rhsMP = IntMP(rhs)
+    let result = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_xor(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -442,8 +442,8 @@ public func ^(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func ^(lhs: Int, rhs: IntMP) -> IntMP {
-    var result = IntMP()
-    var lhsMP = IntMP(lhs)
+    let result = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_xor(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -451,8 +451,8 @@ public func ^(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func ^(lhs: IntMP, rhs: UInt) -> IntMP {
-    var result = IntMP()
-    var rhsMP = IntMP(rhs)
+    let result = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_xor(result.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -460,8 +460,8 @@ public func ^(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func ^(lhs: UInt, rhs: IntMP) -> IntMP {
-    var result = IntMP()
-    var lhsMP = IntMP(lhs)
+    let result = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_xor(result.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -469,7 +469,7 @@ public func ^(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public prefix func ~(x: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
 
     __gmpz_com(result.gmpz_p, x.gmpz_p)
     result._bitLength = x._bitLength
@@ -478,7 +478,7 @@ public prefix func ~(x: IntMP) -> IntMP {
 }
 
 public func +(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_add(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -486,7 +486,7 @@ public func +(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func +(lhs: IntMP, rhs: Int) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     if rhs < 0 {
         __gmpz_sub_ui(result.gmpz_p, lhs.gmpz_p, UInt(-rhs))
@@ -498,7 +498,7 @@ public func +(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func +(lhs: Int, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     if lhs < 0 {
         __gmpz_ui_sub(result.gmpz_p, UInt(-lhs), rhs.gmpz_p)
@@ -511,7 +511,7 @@ public func +(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func +(lhs: IntMP, rhs: UInt) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_add_ui(result.gmpz_p, lhs.gmpz_p, rhs)
     
@@ -519,7 +519,7 @@ public func +(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func +(lhs: UInt, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_add_ui(result.gmpz_p, rhs.gmpz_p, lhs)
     
@@ -527,7 +527,7 @@ public func +(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public func -(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_sub(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -535,7 +535,7 @@ public func -(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func -(lhs: IntMP, rhs: Int) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     if rhs < 0 {
         __gmpz_add_ui(result.gmpz_p, lhs.gmpz_p, UInt(-rhs))
@@ -547,7 +547,7 @@ public func -(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func -(lhs: Int, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     if lhs < 0 {
         __gmpz_add_ui(result.gmpz_p, rhs.gmpz_p, UInt(-lhs))
@@ -560,7 +560,7 @@ public func -(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func -(lhs: IntMP, rhs: UInt) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_sub_ui(result.gmpz_p, lhs.gmpz_p, rhs)
     
@@ -568,7 +568,7 @@ public func -(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func -(lhs: UInt, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_ui_sub(result.gmpz_p, lhs, rhs.gmpz_p)
     
@@ -576,7 +576,7 @@ public func -(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public func *(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_mul(result.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -584,7 +584,7 @@ public func *(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func *(lhs: IntMP, rhs: Int) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_mul_si(result.gmpz_p, lhs.gmpz_p, rhs)
     
@@ -592,7 +592,7 @@ public func *(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func *(lhs: Int, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_mul_si(result.gmpz_p, rhs.gmpz_p, lhs)
     
@@ -600,7 +600,7 @@ public func *(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func *(lhs: IntMP, rhs: UInt) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_mul_ui(result.gmpz_p, lhs.gmpz_p, rhs)
     
@@ -608,7 +608,7 @@ public func *(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func *(lhs: UInt, rhs: IntMP) -> IntMP {
-    var result = IntMP()
+    let result = IntMP()
     
     __gmpz_mul_ui(result.gmpz_p, rhs.gmpz_p, lhs)
     
@@ -616,7 +616,7 @@ public func *(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public func /(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_tdiv_q(q.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -624,8 +624,8 @@ public func /(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func /(lhs: IntMP, rhs: Int) -> IntMP {
-    var q = IntMP()
-    var rhsMP = IntMP(rhs)
+    let q = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_q(q.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -633,8 +633,8 @@ public func /(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func /(lhs: Int, rhs: IntMP) -> IntMP {
-    var q = IntMP()
-    var lhsMP = IntMP(lhs)
+    let q = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_tdiv_q(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -642,8 +642,8 @@ public func /(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func /(lhs: IntMP, rhs: UInt) -> IntMP {
-    var q = IntMP()
-    var rhsMP = IntMP(rhs)
+    let q = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_q(q.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -651,8 +651,8 @@ public func /(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func /(lhs: UInt, rhs: IntMP) -> IntMP {
-    var q = IntMP()
-    var lhsMP = IntMP(lhs)
+    let q = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_tdiv_q(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -660,7 +660,7 @@ public func /(lhs: UInt, rhs: IntMP) -> IntMP {
 }
 
 public func %(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_tdiv_r(q.gmpz_p, lhs.gmpz_p, rhs.gmpz_p)
     
@@ -668,8 +668,8 @@ public func %(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func %(lhs: IntMP, rhs: Int) -> IntMP {
-    var q = IntMP()
-    var rhsMP = IntMP(rhs)
+    let q = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_r(q.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -677,8 +677,8 @@ public func %(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func %(lhs: Int, rhs: IntMP) -> IntMP {
-    var q = IntMP()
-    var lhsMP = IntMP(lhs)
+    let q = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_tdiv_r(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -686,8 +686,8 @@ public func %(lhs: Int, rhs: IntMP) -> IntMP {
 }
 
 public func %(lhs: IntMP, rhs: UInt) -> IntMP {
-    var q = IntMP()
-    var rhsMP = IntMP(rhs)
+    let q = IntMP()
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_r(q.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
     
@@ -695,8 +695,8 @@ public func %(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func %(lhs: UInt, rhs: IntMP) -> IntMP {
-    var q = IntMP()
-    var lhsMP = IntMP(lhs)
+    let q = IntMP()
+    let lhsMP = IntMP(lhs)
     
     __gmpz_tdiv_r(q.gmpz_p, lhsMP.gmpz_p, rhs.gmpz_p)
     
@@ -794,13 +794,13 @@ public func /=(inout lhs: IntMP, rhs: IntMP) {
 }
 
 public func /=(inout lhs: IntMP, rhs: Int) {
-    var rhsMP = IntMP(rhs)
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_q(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
 }
 
 public func /=(inout lhs: IntMP, rhs: UInt) {
-    var rhsMP = IntMP(rhs)
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_q(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
 }
@@ -810,19 +810,19 @@ public func %=(inout lhs: IntMP, rhs: IntMP) {
 }
 
 public func %=(inout lhs: IntMP, rhs: Int) {
-    var rhsMP = IntMP(rhs)
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_r(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
 }
 
 public func %=(inout lhs: IntMP, rhs: UInt) {
-    var rhsMP = IntMP(rhs)
+    let rhsMP = IntMP(rhs)
     
     __gmpz_tdiv_r(lhs.gmpz_p, lhs.gmpz_p, rhsMP.gmpz_p)
 }
 
 public func <<(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
     
@@ -830,7 +830,7 @@ public func <<(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func <<(lhs: IntMP, rhs: Int) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
     
@@ -838,7 +838,7 @@ public func <<(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func <<(lhs: IntMP, rhs: UInt) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_mul_2exp(q.gmpz_p, lhs.gmpz_p, rhs)
     
@@ -846,7 +846,7 @@ public func <<(lhs: IntMP, rhs: UInt) -> IntMP {
 }
 
 public func >>(lhs: IntMP, rhs: IntMP) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_fdiv_q_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
     
@@ -854,7 +854,7 @@ public func >>(lhs: IntMP, rhs: IntMP) -> IntMP {
 }
 
 public func >>(lhs: IntMP, rhs: Int) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_fdiv_q_2exp(q.gmpz_p, lhs.gmpz_p, UInt(rhs))
     
@@ -862,7 +862,7 @@ public func >>(lhs: IntMP, rhs: Int) -> IntMP {
 }
 
 public func >>(lhs: IntMP, rhs: UInt) -> IntMP {
-    var q = IntMP()
+    let q = IntMP()
     
     __gmpz_fdiv_q_2exp(q.gmpz_p, lhs.gmpz_p, rhs)
     
@@ -907,11 +907,11 @@ extension IntMP: MutableSliceable {
     }
 
     func wrap(index: Int) {
-        var result = __gmpz_tstbit(gmpz_p, UInt(index)) > 0 ? IntMP(-1) : IntMP(0)
+        let result = __gmpz_tstbit(gmpz_p, UInt(index)) > 0 ? IntMP(-1) : IntMP(0)
         let initResult = Int(result)
-        var mask = IntMP(1)
-        var cmpMask = IntMP()
-        var otherBits = IntMP()
+        let mask = IntMP(1)
+        let cmpMask = IntMP()
+        let otherBits = IntMP()
         
         __gmpz_mul_2exp(mask.gmpz_p, mask.gmpz_p, UInt(index - 1))
         __gmpz_sub_ui(mask.gmpz_p, mask.gmpz_p, 1)
@@ -936,7 +936,7 @@ extension IntMP: MutableSliceable {
         }
         
         set(newValue) {
-            var value = newValue!
+            let value = newValue!
             let endBit = endIndex
             if position < endIndex {
                 if value {
@@ -969,10 +969,10 @@ extension IntMP: MutableSliceable {
                 j = startIndex
             }
             
-            var val = IntMP(self)
+            let val = IntMP(self)
             let delta = i - j
             
-            var disp = j - self.startIndex
+            let disp = j - self.startIndex
             
             if disp > 0 {
                 __gmpz_fdiv_q_2exp(val.gmpz_p, self.gmpz_p, UInt(disp))
@@ -981,7 +981,7 @@ extension IntMP: MutableSliceable {
             }
             
             if delta < self.endIndex {
-                var mask = IntMP(1)
+                let mask = IntMP(1)
                 
                 __gmpz_mul_2exp(mask.gmpz_p, mask.gmpz_p, UInt(delta))
                 __gmpz_sub_ui(mask.gmpz_p, mask.gmpz_p, 1)
@@ -1006,14 +1006,14 @@ extension IntMP: MutableSliceable {
                     j = startIndex
                 }
                 
-                var delta = i - j
+                let delta = i - j
                 
-                var mask = IntMP(1)
+                let mask = IntMP(1)
                 
                 __gmpz_mul_2exp(mask.gmpz_p, mask.gmpz_p, UInt(delta))
                 __gmpz_sub_ui(mask.gmpz_p, mask.gmpz_p, 1)
                 
-                var filter: IntMP = 0
+                let filter: IntMP = 0
 
                 __gmpz_mul_2exp(filter.gmpz_p, mask.gmpz_p, UInt(j - self.startIndex))
                 __gmpz_com(filter.gmpz_p, filter.gmpz_p)
@@ -1022,7 +1022,7 @@ extension IntMP: MutableSliceable {
                 let filterInt = Int(filter)
                 let filteredInt = Int(self)
                 
-                var value: IntMP = 0
+                let value: IntMP = 0
                 
                 __gmpz_and(value.gmpz_p, newValue.gmpz_p, mask.gmpz_p)
                 __gmpz_mul_2exp(value.gmpz_p, value.gmpz_p, UInt(j - self.startIndex))
@@ -1040,14 +1040,14 @@ extension IntMP: MutableSliceable {
         }
     }
     
-    public func generate() -> GeneratorOf<Bool?> {
+    public func generate() -> AnyGenerator<Bool?> {
         var index = 0
-        var value = IntMP(self)
+        let value = IntMP(self)
         let valueInt = Int(value)
         let _endIndex = _bitLength ?? bitLength
-        return GeneratorOf {
+        return anyGenerator {
             if index < _endIndex {
-                var result = Bool(Int(__gmpz_tstbit(value.gmpz_p, UInt(index))))
+                let result = Bool(Int(__gmpz_tstbit(value.gmpz_p, UInt(index))))
                 index++
                 return result
             } else {
@@ -1058,7 +1058,7 @@ extension IntMP: MutableSliceable {
 }
 
 public func **(base: IntMP, exp: IntMP) -> (IntMP) {
-    var result = IntMP()
+    let result = IntMP()
     
     if exp > 0 {
         if base >= 0 {

@@ -697,7 +697,7 @@ class IntMPTests: XCTestCase {
         var startIndex: Int
         var endIndex: Int
 
-        do {
+        repeat {
             a = IntMP(random())
             startIndex = a.startIndex + 1
             endIndex = a.bitLength - 1
@@ -727,7 +727,7 @@ class IntMPTests: XCTestCase {
         var startIndex: Int
         var endIndex: Int
         
-        do {
+        repeat {
             a = IntMP(random())
             startIndex = a.startIndex + 1
             endIndex = a.bitLength - 1
