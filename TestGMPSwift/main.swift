@@ -10,10 +10,12 @@ import Foundation
 import Swift
 import GMPSwift
 
-println("Hello, World!")
+print("Hello, World!")
 
-var mp = IntMP(1)
+var a = IntMP(1)
 
-println(mp.description)
+
+print(mp.description)
+
 
 

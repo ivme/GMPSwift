@@ -45,7 +45,7 @@ class IntMPTests: XCTestCase {
     
     func testInitBase() {
         // This is an example of a functional test case.
-        var value = IntMP()
+        let value = IntMP()
         
         XCTAssert(value == 0, "Pass")
     }
@@ -53,30 +53,30 @@ class IntMPTests: XCTestCase {
     func testInitInitialValue() {
         // This is an example of a functional test case.
         let check = 36
-        var value = IntMP(check)
+        let value = IntMP(check)
         
         XCTAssert(value == check, "Pass")
     }
     
     func testInitIntMaxMax() {
         // This is an example of a functional test case.
-        var check = IntMax.max
-        var value = IntMP(check)
+        let check = IntMax.max
+        let value = IntMP(check)
         
         XCTAssert(value.description == check.description, "Pass")
     }
     
     func testInitIntMaxMin() {
         // This is an example of a functional test case.
-        var check = IntMax.min
-        var value = IntMP(check)
+        let check = IntMax.min
+        let value = IntMP(check)
         
         XCTAssert(value.description == check.description, "Pass")
     }
     
     func testHashable() {
         // This is an example of a functional test case.
-        var check = IntMP(value: IntMax.min, bitcnt: 130)
+        let check = IntMP(value: IntMax.min, bitcnt: 130)
         var value = IntMP(value: IntMax.min, bitcnt: 200)
 
         XCTAssert(check.description == value.description, "Pass")
@@ -355,7 +355,7 @@ class IntMPTests: XCTestCase {
         let rhsPInt = 56
         var lhsPMP = IntMP(lhsPInt)
         let rhsPMP = IntMP(rhsPInt)
-        var nInt = -33
+        let nInt = -33
         
         lhsPMP += rhsPMP
         lhsPInt += rhsPInt
@@ -379,7 +379,7 @@ class IntMPTests: XCTestCase {
         let rhsPInt = 56
         var lhsPMP = IntMP(lhsPInt)
         let rhsPMP = IntMP(rhsPInt)
-        var nInt = -33
+        let nInt = -33
         
         lhsPMP -= rhsPMP
         lhsPInt -= rhsPInt
@@ -403,7 +403,7 @@ class IntMPTests: XCTestCase {
         let rhsPInt = 56
         var lhsPMP = IntMP(lhsPInt)
         let rhsPMP = IntMP(rhsPInt)
-        var nInt = -33
+        let nInt = -33
         
         lhsPMP *= rhsPMP
         lhsPInt *= rhsPInt
@@ -427,7 +427,7 @@ class IntMPTests: XCTestCase {
         let rhsPInt = 56
         var lhsPMP = IntMP(lhsPInt)
         let rhsPMP = IntMP(rhsPInt)
-        var nInt = -33
+        let nInt = -33
         
         lhsPMP /= rhsPMP
         lhsPInt /= rhsPInt
@@ -451,7 +451,7 @@ class IntMPTests: XCTestCase {
         let rhsPInt = 56
         var lhsPMP = IntMP(lhsPInt)
         let rhsPMP = IntMP(rhsPInt)
-        var nInt = -33
+        let nInt = -33
         
         lhsPMP %= rhsPMP
         lhsPInt %= rhsPInt
@@ -652,7 +652,7 @@ class IntMPTests: XCTestCase {
         var i = a.startIndex
         
         for val in a {
-            var check = a[i++]
+            let check = a[i++]
             XCTAssert(val == check, "Pass")
         }
         
@@ -661,28 +661,28 @@ class IntMPTests: XCTestCase {
     
     func testCollectionSet() {
         // This is an example of a functional test case.
-        var a = IntMP(random())
+        let a = IntMP(random())
         var i = a.startIndex
         
         for val in a {
             a[i] = !(val!)
-            var check = a[i++]
+            let check = a[i++]
             XCTAssert(val != check, "Pass")
         }
     }
     
     func testEndIndexSet() {
         // This is an example of a functional test case.
-        var aInt = random()
-        var a = IntMP(value: aInt, bitCnt: aInt.endIndex)
+        let aInt = random()
+        let a = IntMP(value: aInt, bitCnt: aInt.endIndex)
         let b = IntMP(a)
-        let bInt = Int(b)
+        _ = Int(b)
         XCTAssert(a == b, "Pass")
-        var i = a.endIndex - 1
+        let i = a.endIndex - 1
         
-        var val = a[i]!
+        let val = a[i]!
         a[i] = !val
-        var check = a[i]!
+        let check = a[i]!
         XCTAssert(val != check, "Pass")
         XCTAssert(check == (a < 0), "Pass")
         let mask = IntMP((1 << (i - 1)) - 1)
@@ -709,7 +709,7 @@ class IntMPTests: XCTestCase {
         var i = 0
         
         for j in range {
-            var checkA = a[j]!
+            let checkA = a[j]!
             var checkB = b[i++]
             
             if checkB == nil {
@@ -733,42 +733,42 @@ class IntMPTests: XCTestCase {
             endIndex = a.bitLength - 1
         } while(endIndex <= startIndex)
         
-        let aInt = Int(a)
+        _ = Int(a)
         let range = startIndex ..< endIndex
         let b = ~a[range]
-        let bInt = Int(b)
+        _ = Int(b)
         a[range] = b
-        let newAInt = Int(a)
+        _ = Int(a)
         var i = startIndex
         var j = 0
         
         for checkB in b {
-            var checkA = a[i++]!
+            let checkA = a[i++]!
             XCTAssert(checkA == checkB, "Pass")
             j++
         }
-        let endIndexFinal = a.bitLength - 1
+        _ = a.bitLength - 1
         XCTAssert(i == endIndex, "Pass")
     }
     
     func testEndSliceSet() {
         // This is an example of a functional test case.
-        var aInt = random()
-        var a = IntMP(value: aInt, bitCnt: aInt.endIndex)
+        let aInt = random()
+        let a = IntMP(value: aInt, bitCnt: aInt.endIndex)
         let c = IntMP(a)
-        var startIndex = (a.endIndex - a.startIndex) >> 1
-        var endIndex = a.endIndex
+        let startIndex = (a.endIndex - a.startIndex) >> 1
+        let endIndex = a.endIndex
         
         let range = startIndex ..< endIndex
         let b = ~a[range]
-        let bInt = Int(b)
+        _ = Int(b)
         a[range] = b
-        let newAInt = Int(a)
+        _ = Int(a)
         var i = startIndex
         var j = 0
         
         for checkB in b {
-            var checkA = a[i++]!
+            let checkA = a[i++]!
             XCTAssert(checkA == checkB, "Pass")
             j++
         }
@@ -776,8 +776,8 @@ class IntMPTests: XCTestCase {
         XCTAssert(a[a.endIndex - 1] == (a < 0), "Pass")
         
         for i in 0 ..< startIndex {
-            var checkA = a[i]!
-            var checkC = c[i]!
+            let checkA = a[i]!
+            let checkC = c[i]!
             XCTAssert(checkA == checkC, "Pass")
         }
         
@@ -788,17 +788,17 @@ class IntMPTests: XCTestCase {
         // This is an example of a functional test case.
         var a = 3
         var b = -5
-        var c: UInt = 4
+        let c: UInt = 4
         
         var acc = 1
-        for i in 0 ..< c {
+        for _ in 0 ..< c {
             acc *= a
         }
         
         XCTAssert(IntMP(a) ** IntMP(c) == UInt(acc), "Pass")
 
         acc = 1
-        for i in 0 ..< a {
+        for _ in 0 ..< a {
             acc *= b
         }
         var powMP = IntMP(b) ** IntMP(a)
@@ -830,7 +830,7 @@ class IntMPTests: XCTestCase {
         b = 2
 
         acc = 1
-        for i in 0 ..< a {
+        for _ in 0 ..< a {
             acc *= b
         }
         powMP = IntMP(b) ** IntMP(a)

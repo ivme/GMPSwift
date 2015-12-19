@@ -908,7 +908,7 @@ extension IntMP: MutableSliceable {
 
     func wrap(index: Int) {
         let result = __gmpz_tstbit(gmpz_p, UInt(index)) > 0 ? IntMP(-1) : IntMP(0)
-        let initResult = Int(result)
+        _ = Int(result)
         let mask = IntMP(1)
         let cmpMask = IntMP()
         let otherBits = IntMP()
@@ -1019,8 +1019,8 @@ extension IntMP: MutableSliceable {
                 __gmpz_com(filter.gmpz_p, filter.gmpz_p)
                 __gmpz_and(self.gmpz_p, self.gmpz_p, filter.gmpz_p)
 
-                let filterInt = Int(filter)
-                let filteredInt = Int(self)
+                _ = Int(filter)
+                _ = Int(self)
                 
                 let value: IntMP = 0
                 
@@ -1028,10 +1028,10 @@ extension IntMP: MutableSliceable {
                 __gmpz_mul_2exp(value.gmpz_p, value.gmpz_p, UInt(j - self.startIndex))
                 __gmpz_ior(self.gmpz_p, self.gmpz_p, value.gmpz_p)
                 
-                let newValueInt = Int(newValue)
-                let valueInt = Int(value)
-                let maskInt = Int(mask)
-                let finalInt = Int(self)
+                _ = Int(newValue)
+                _ = Int(value)
+                _ = Int(mask)
+                _ = Int(self)
 
                 if i == endIndex {
                     wrap(i - 1)
@@ -1043,7 +1043,7 @@ extension IntMP: MutableSliceable {
     public func generate() -> AnyGenerator<Bool?> {
         var index = 0
         let value = IntMP(self)
-        let valueInt = Int(value)
+        _ = Int(value)
         let _endIndex = _bitLength ?? bitLength
         return anyGenerator {
             if index < _endIndex {

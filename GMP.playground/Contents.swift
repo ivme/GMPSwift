@@ -3,6 +3,6 @@
 import Swift
 import GMPSwift
 
-var str = "Hello, playground"
 
-var a = IntMP()
+var h: String = "hello world"
+var a: IntMP = IntMP(1)

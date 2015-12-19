@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6309D74B1C24EA6F00213FCD /* GMPSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F55B181B8E35780072F09B /* GMPSwift.framework */; };
 		F420D1F11B9522A50090D7D6 /* gpl-v2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1ED1B9522A50090D7D6 /* gpl-v2.0.txt */; };
 		F420D1F21B9522A50090D7D6 /* gpl-v3.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1EE1B9522A50090D7D6 /* gpl-v3.0.txt */; };
 		F420D1F31B9522A50090D7D6 /* lglp-v3.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F420D1EF1B9522A50090D7D6 /* lglp-v3.0.txt */; };
@@ -86,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6309D74B1C24EA6F00213FCD /* GMPSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -440,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

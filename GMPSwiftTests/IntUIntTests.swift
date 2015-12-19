@@ -67,17 +67,17 @@ class IntUIntTests: XCTestCase {
         // This is an example of a functional test case.
         var a = 3
         var b = -5
-        var c: UInt = 4
+        let c: UInt = 4
         
         var acc = 1
-        for i in 0 ..< c {
+        for _ in 0 ..< c {
             acc *= a
         }
         
         XCTAssert(UInt(a) ** c == UInt(acc), "Pass")
         
         acc = 1
-        for i in 0 ..< a {
+        for _ in 0 ..< a {
             acc *= b
         }
         var powN = Int(b) ** Int(a)
@@ -113,7 +113,7 @@ class IntUIntTests: XCTestCase {
         b = 2
         
         acc = 1
-        for i in 0 ..< a {
+        for _ in 0 ..< a {
             acc *= b
         }
         powN = Int(b) ** Int(a)
@@ -145,7 +145,7 @@ class IntUIntTests: XCTestCase {
         var i = a.startIndex
         
         for val in a {
-            var check = a[i++]
+            let check = a[i++]
             XCTAssert(val == check, "Pass")
         }
 
@@ -159,7 +159,7 @@ class IntUIntTests: XCTestCase {
         
         for val in a {
             a[i] = !(val!)
-            var check = a[i++]
+            let check = a[i++]
             XCTAssert(val != check, "Pass")
         }
         
@@ -177,8 +177,8 @@ class IntUIntTests: XCTestCase {
         var i = 0
 
         for j in range {
-            var checkA = a[j]!
-            var checkB = b[i++]!
+            let checkA = a[j]!
+            let checkB = b[i++]!
             XCTAssert(checkA == checkB, "Pass")
         }
         
@@ -197,8 +197,8 @@ class IntUIntTests: XCTestCase {
         var i = 0
         
         for j in range {
-            var checkA = a[j]!
-            var checkB = b[i++]!
+            let checkA = a[j]!
+            let checkB = b[i++]!
             XCTAssert(checkA == checkB, "Pass")
         }
         
@@ -213,7 +213,7 @@ class IntUIntTests: XCTestCase {
         var i = a.startIndex
         
         for val in a {
-            var check = a[i++]
+            let check = a[i++]
             XCTAssert(val == check, "Pass")
         }
         
@@ -227,7 +227,7 @@ class IntUIntTests: XCTestCase {
         
         for val in a {
             a[i] = !(val!)
-            var check = a[i++]
+            let check = a[i++]
             XCTAssert(val != check, "Pass")
         }
         
@@ -245,8 +245,8 @@ class IntUIntTests: XCTestCase {
         var i = 0
         
         for j in range {
-            var checkA = a[j]!
-            var checkB = b[i++]!
+            let checkA = a[j]!
+            let checkB = b[i++]!
             XCTAssert(checkA == checkB, "Pass")
         }
         
@@ -265,8 +265,8 @@ class IntUIntTests: XCTestCase {
         var i = 0
         
         for j in range {
-            var checkA = a[j]!
-            var checkB = b[i++]!
+            let checkA = a[j]!
+            let checkB = b[i++]!
             XCTAssert(checkA == checkB, "Pass")
         }
         
