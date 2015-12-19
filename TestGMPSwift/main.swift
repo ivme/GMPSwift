@@ -15,7 +15,7 @@ print("Hello, World!")
 var a = IntMP(1)
 
 
-print(mp.description)
+print(a.description)
 
 
 
